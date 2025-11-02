@@ -317,7 +317,7 @@ internal class CreateNewsArticleDtoBuilder
 
     public CreateNewsArticleDtoBuilder AsValidTechnologyNews()
     {
-        return WithCategory("Technology")
+        return WithCategory("popular")
             .WithType("Article")
             .WithCaption("Valid Technology NewsArticle")
             .WithSummary("A valid technology news article for testing")
@@ -364,7 +364,7 @@ internal class UpdateNewsArticleDtoBuilder
     {
         _dto = new UpdateNewsArticleDto
         {
-            Category = "Technology",
+            Category = "popular",
             Type = "Article",
             Caption = "Updated Test Caption",
             Keywords = "updated, test",

@@ -103,6 +103,6 @@ app.MapHealthChecks("/health");
 await app.RunAsync().ConfigureAwait(false);
 
 // Make Program class visible to integration tests
-internal static partial class Program
+public partial class Program
 {
 }

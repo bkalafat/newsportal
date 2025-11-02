@@ -46,7 +46,7 @@ public class CreateNewsArticleDtoValidatorTests
     public void Category_WhenValid_ShouldNotHaveValidationError()
     {
         // Arrange
-        var dto = CreateNewsArticleDtoBuilder.Create().WithCategory("Technology").Build();
+        var dto = CreateNewsArticleDtoBuilder.Create().WithCategory("popular").Build();
 
         // Act
         var result = _validator.TestValidate(dto);

@@ -10,7 +10,7 @@ public class CreateNewsArticleDtoTests
         // Arrange
         var dto = new CreateNewsArticleDto
         {
-            Category = "Technology",
+            Category = "popular",
             Type = "Article",
             Caption = "Test Caption",
             Keywords = "test, keywords",
@@ -95,7 +95,7 @@ public class CreateNewsArticleDtoTests
         // Arrange & Act
         var dto = new CreateNewsArticleDto
         {
-            Category = "Technology",
+            Category = "popular",
             Type = "Article",
             Caption = "Test",
             Summary = "Test summary",

@@ -5,6 +5,9 @@ import { NewsCardSkeleton } from "@/components/news/news-card-skeleton";
 import { Header } from "@/components/layout/header";
 import { Footer } from "@/components/layout/footer";
 
+// ISR: Revalidate every 5 minutes for search results
+export const revalidate = 300; // 5 minutes
+
 export const metadata: Metadata = {
   title: "Arama - Teknoloji Haberleri",
   description:

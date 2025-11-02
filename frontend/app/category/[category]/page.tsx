@@ -1,6 +1,9 @@
 import { Metadata } from "next";
 import CategoryPageClient from "./page-client";
 
+// ISR: Revalidate every 10 minutes for category pages
+export const revalidate = 600; // 10 minutes
+
 interface CategoryPageProps {
   params: Promise<{
     category: string;

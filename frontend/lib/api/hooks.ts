@@ -19,6 +19,7 @@ export const newsQueryKeys = {
 
 /**
  * Hook to fetch all news
+ * Optimized with longer cache times for better performance
  */
 export function useAllNews(
   options?: Omit<UseQueryOptions<News[], ApiError>, "queryKey" | "queryFn">
@@ -26,14 +27,15 @@ export function useAllNews(
   return useQuery<News[], ApiError>({
     queryKey: newsQueryKeys.lists(),
     queryFn: () => newsApi.getAllNews(),
-    staleTime: 5 * 60 * 1000, // 5 minutes
-    gcTime: 10 * 60 * 1000, // 10 minutes (formerly cacheTime)
+    staleTime: 10 * 60 * 1000, // 10 minutes - increased for better performance
+    gcTime: 30 * 60 * 1000, // 30 minutes - longer garbage collection time
     ...options,
   });
 }
 
 /**
  * Hook to fetch news by ID
+ * Optimized with longer cache for individual articles
  */
 export function useNewsById(
   id: string,
@@ -42,7 +44,8 @@ export function useNewsById(
   return useQuery<News, ApiError>({
     queryKey: newsQueryKeys.detail(id),
     queryFn: () => newsApi.getNewsById(id),
-    staleTime: 5 * 60 * 1000,
+    staleTime: 60 * 60 * 1000, // 1 hour - articles don't change often
+    gcTime: 2 * 60 * 60 * 1000, // 2 hours
     enabled: !!id,
     ...options,
   });
@@ -50,6 +53,7 @@ export function useNewsById(
 
 /**
  * Hook to fetch news by category
+ * Optimized with longer cache times
  */
 export function useNewsByCategory(
   category: string,
@@ -58,7 +62,8 @@ export function useNewsByCategory(
   return useQuery<News[], ApiError>({
     queryKey: newsQueryKeys.category(category),
     queryFn: () => newsApi.getNewsByCategory(category),
-    staleTime: 5 * 60 * 1000,
+    staleTime: 15 * 60 * 1000, // 15 minutes - category pages update less frequently
+    gcTime: 30 * 60 * 1000, // 30 minutes
     enabled: !!category,
     ...options,
   });

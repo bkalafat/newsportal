@@ -27,9 +27,9 @@ public class NewsEntityTests
         news.ViewCount.Should().Be(0);
         news.IsActive.Should().BeFalse();
         news.IsSecondPageNews.Should().BeFalse();
-        news.ExpressDate.Should().Be(DateTime.MinValue);
-        news.CreateDate.Should().Be(DateTime.MinValue);
-        news.UpdateDate.Should().Be(DateTime.MinValue);
+        news.ExpressDate.Should().BeCloseTo(DateTime.UtcNow, TimeSpan.FromSeconds(1)); // Changed: Entity sets default to UtcNow
+        news.CreateDate.Should().BeCloseTo(DateTime.UtcNow, TimeSpan.FromSeconds(1)); // Changed: Entity sets default to UtcNow
+        news.UpdateDate.Should().BeCloseTo(DateTime.UtcNow, TimeSpan.FromSeconds(1)); // Changed: Entity sets default to UtcNow
     }
 
     [Fact]
@@ -37,7 +37,7 @@ public class NewsEntityTests
     {
         // Arrange
         var id = Guid.NewGuid().ToString();
-        var category = "Technology";
+        var category = "popular";
         var type = "Article";
         var caption = "Test Caption";
         var keywords = "test, keywords";

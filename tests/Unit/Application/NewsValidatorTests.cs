@@ -50,7 +50,7 @@ public class NewsValidatorTests
     public void Category_WhenValid_ShouldNotHaveValidationError()
     {
         // Arrange
-        var dto = new CreateNewsArticleDto { Category = "Technology" };
+        var dto = new CreateNewsArticleDto { Category = "popular" };
 
         // Act & Assert
         var result = _validator.TestValidate(dto);
@@ -252,7 +252,7 @@ public class NewsValidatorTests
         // Arrange
         var dto = new CreateNewsArticleDto
         {
-            Category = "Technology",
+            Category = "popular",
             Type = "Article",
             Caption = "Test Caption",
             Keywords = "test, keywords",

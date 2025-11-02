@@ -23,7 +23,7 @@ public class UpdateNewsArticleDtoValidatorTests
     [Fact]
     public void Category_WhenValidLength_ShouldNotHaveValidationError()
     {
-        var dto = UpdateNewsArticleDtoBuilder.Create().WithCategory("Technology").Build();
+        var dto = UpdateNewsArticleDtoBuilder.Create().WithCategory("popular").Build();
         var result = _validator.TestValidate(dto);
         result.ShouldNotHaveValidationErrorFor(dto => dto.Category);
     }

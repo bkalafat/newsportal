@@ -10,6 +10,7 @@ using NewsApi.Domain.Entities;
 using NewsApi.Domain.Interfaces;
 using SixLabors.ImageSharp;
 using SixLabors.ImageSharp.Formats.Jpeg;
+using SixLabors.ImageSharp.Formats.Webp;
 using SixLabors.ImageSharp.Processing;
 
 namespace NewsApi.Infrastructure.Services;
@@ -50,38 +51,39 @@ internal sealed class MinioImageStorageService : IImageStorageService
         // Ensure bucket exists
         await EnsureBucketExistsAsync().ConfigureAwait(false);
 
-        // Generate object keys
-        var extension = Path.GetExtension(image.FileName).ToLowerInvariant();
-        var objectKey = $"{newsId}{extension}";
-        var thumbnailKey = $"{newsId}-thumb{extension}";
+        // Generate object keys - always use .webp extension for optimal compression
+        var objectKey = $"{newsId}.webp";
+        var thumbnailKey = $"{newsId}-thumb.webp";
         var imageStream = image.OpenReadStream();
-        await
 
-        // Upload original image
-        using (imageStream.ConfigureAwait(false))
+        // Upload original image (convert to WebP)
+        using (imageStream)
         {
             var imageBytes = await ReadStreamToBytes(imageStream).ConfigureAwait(false);
 
-            // Get image dimensions
+            // Load image and convert to WebP format
             using var img = Image.Load(imageBytes);
             var width = img.Width;
             var height = img.Height;
 
+            // Convert to WebP with high quality
+            var webpBytes = await ConvertToWebPAsync(imageBytes, quality: 85).ConfigureAwait(false);
+
             // Upload to MinIO
-            using var uploadStream = new MemoryStream(imageBytes);
+            using var uploadStream = new MemoryStream(webpBytes);
             await _minioClient
                 .PutObjectAsync(
                     new PutObjectArgs()
                         .WithBucket(_settings.BucketName)
                         .WithObject(objectKey)
                         .WithStreamData(uploadStream)
-                        .WithObjectSize(imageBytes.Length)
-                        .WithContentType(image.ContentType),
+                        .WithObjectSize(webpBytes.Length)
+                        .WithContentType("image/webp"),
                     CancellationToken.None).ConfigureAwait(false);
 
             _logger.LogInformation("Uploaded image {ObjectKey} to MinIO", objectKey);
 
-            // Generate and upload thumbnail if requested
+            // Generate and upload thumbnail if requested (as WebP)
             if (generateThumbnail)
             {
                 var thumbnailBytes = await GenerateThumbnailAsync(
@@ -98,7 +100,7 @@ internal sealed class MinioImageStorageService : IImageStorageService
                             .WithObject(thumbnailKey)
                             .WithStreamData(thumbnailStream)
                             .WithObjectSize(thumbnailBytes.Length)
-                            .WithContentType(image.ContentType)
+                            .WithContentType("image/webp")
                             , CancellationToken.None).ConfigureAwait(false);
 
                 _logger.LogInformation("Uploaded thumbnail {ThumbnailKey} to MinIO", thumbnailKey);
@@ -107,9 +109,9 @@ internal sealed class MinioImageStorageService : IImageStorageService
             // Build image metadata
             return new ImageMetadata
             {
-                FileName = image.FileName,
-                ContentType = image.ContentType,
-                FileSize = image.Length,
+                FileName = Path.GetFileNameWithoutExtension(image.FileName) + ".webp",
+                ContentType = "image/webp",
+                FileSize = webpBytes.Length,
                 Width = width,
                 Height = height,
                 UploadedAt = DateTime.UtcNow,
@@ -190,7 +192,7 @@ internal sealed class MinioImageStorageService : IImageStorageService
     /// </summary>
     public string GetThumbnailUrl(string newsId, string extension)
     {
-        var thumbnailKey = $"{newsId}-thumb{extension}";
+        var thumbnailKey = $"{newsId}-thumb.webp";
         return GetImageUrl(thumbnailKey);
     }
 
@@ -250,7 +252,7 @@ internal sealed class MinioImageStorageService : IImageStorageService
     }
 
     /// <summary>
-    /// Generate a thumbnail from the original image
+    /// Generate a thumbnail from the original image (WebP format)
     /// </summary>
     private static async Task<byte[]> GenerateThumbnailAsync(byte[] imageBytes, int width, int height)
     {
@@ -259,10 +261,21 @@ internal sealed class MinioImageStorageService : IImageStorageService
         // Resize image maintaining aspect ratio
         image.Mutate(transform => transform.Resize(new ResizeOptions { Size = new Size(width, height), Mode = ResizeMode.Max }));
 
-        // Save to memory stream
+        // Save to memory stream as WebP
         using var outputStream = new MemoryStream();
-        await image.SaveAsync(outputStream, new JpegEncoder { Quality = 80 }).ConfigureAwait(false);
+        await image.SaveAsync(outputStream, new WebpEncoder { Quality = 80, FileFormat = WebpFileFormatType.Lossy }).ConfigureAwait(false);
 
+        return outputStream.ToArray();
+    }
+
+    /// <summary>
+    /// Convert image to WebP format
+    /// </summary>
+    private static async Task<byte[]> ConvertToWebPAsync(byte[] imageBytes, int quality = 85)
+    {
+        using var image = Image.Load(imageBytes);
+        using var outputStream = new MemoryStream();
+        await image.SaveAsync(outputStream, new WebpEncoder { Quality = quality, FileFormat = WebpFileFormatType.Lossy }).ConfigureAwait(false);
         return outputStream.ToArray();
     }
 
