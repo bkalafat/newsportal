@@ -1,5 +1,6 @@
 "use client";
 
+import { useMemo } from "react";
 import { useTranslations } from "next-intl";
 import { NewsCategory } from "@/lib/api/types";
 import { Card, CardHeader, CardTitle } from "@/components/ui/card";
@@ -8,6 +9,7 @@ import {
   Cpu,
   TrendingUp,
 } from "lucide-react";
+import { useAllNews } from "@/lib/api/hooks";
 
 const categoryIcons = {
   [NewsCategory.Popular]: TrendingUp,
@@ -23,22 +25,55 @@ const categoryIcons = {
 
 export function CategoriesSection() {
   const t = useTranslations("categories");
+  const { data: news } = useAllNews();
 
-  // Show only top 6 categories on homepage
-  const categories = [
+  // All available categories in priority order
+  const allCategories = [
     NewsCategory.Popular,
     NewsCategory.ArtificialIntelligence,
     NewsCategory.OpenAI,
     NewsCategory.GithubCopilot,
     NewsCategory.ClaudeAI,
     NewsCategory.DotNet,
+    NewsCategory.MCP,
+    NewsCategory.Robotics,
+    NewsCategory.DeepSeek,
   ];
+
+  // Filter categories that have at least one news item
+  const categoriesWithNews = useMemo(() => {
+    if (!news || news.length === 0) {
+      return [];
+    }
+
+    // Count news per category
+    const categoryCounts = new Map<string, number>();
+    news.forEach((item) => {
+      const category = item.category?.toLowerCase();
+      if (category) {
+        categoryCounts.set(category, (categoryCounts.get(category) || 0) + 1);
+      }
+    });
+
+    // Filter categories that have news and take top 6
+    return allCategories
+      .filter((category) => {
+        const count = categoryCounts.get(category) || 0;
+        return count > 0;
+      })
+      .slice(0, 6);
+  }, [news]);
+
+  // Don't show section if no categories have news
+  if (categoriesWithNews.length === 0) {
+    return null;
+  }
 
   return (
     <section className="space-y-6">
       <h2 className="text-3xl font-bold">{t("all")}</h2>
       <div className="grid grid-cols-2 gap-4 md:grid-cols-3 lg:grid-cols-6">
-        {categories.map((category) => {
+        {categoriesWithNews.map((category) => {
           const Icon = categoryIcons[category];
           return (
             <Card key={category} className="group cursor-pointer transition-shadow hover:shadow-md">

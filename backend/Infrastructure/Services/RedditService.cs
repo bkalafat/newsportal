@@ -226,36 +226,74 @@ public sealed class RedditService
     private static CreateSocialMediaPostDto MapRedditPostToDto(RedditPostData data, string subreddit)
     {
         var imageUrls = new List<string>();
+        string? videoUrl = null;
 
-        // Extract image URLs
-        if (!string.IsNullOrEmpty(data.Url))
+        // Check if this is a video post
+        if (data.IsVideo == true || string.Equals(data.PostHint, "hosted:video", StringComparison.OrdinalIgnoreCase))
         {
-            // Direct image links
-            if (data.Url.EndsWith(".jpg", StringComparison.OrdinalIgnoreCase) ||
-                data.Url.EndsWith(".jpeg", StringComparison.OrdinalIgnoreCase) ||
-                data.Url.EndsWith(".png", StringComparison.OrdinalIgnoreCase) ||
-                data.Url.EndsWith(".gif", StringComparison.OrdinalIgnoreCase))
+            // Extract video URL from media
+            if (data.Media?.RedditVideo?.FallbackUrl != null)
             {
-                imageUrls.Add(data.Url);
+                videoUrl = data.Media.RedditVideo.FallbackUrl;
             }
 
-            // Thumbnail
-            else if (!string.IsNullOrEmpty(data.Thumbnail) &&
-                     data.Thumbnail.StartsWith("http", StringComparison.OrdinalIgnoreCase))
+            // For video posts, always try to get thumbnail from preview
+            if (data.Preview?.Images != null && data.Preview.Images.Count > 0)
+            {
+                var previewUrls = data.Preview.Images
+                    .Where(img => !string.IsNullOrEmpty(img.Source?.Url))
+                    .Select(img => System.Net.WebUtility.HtmlDecode(img.Source!.Url)!)
+                    .Take(1); // Take first preview as thumbnail
+
+                imageUrls.AddRange(previewUrls);
+            }
+
+            // Fallback to thumbnail if preview not available
+            if (imageUrls.Count == 0 && !string.IsNullOrEmpty(data.Thumbnail) &&
+                data.Thumbnail.StartsWith("http", StringComparison.OrdinalIgnoreCase) &&
+                !string.Equals(data.Thumbnail, "default", StringComparison.OrdinalIgnoreCase) &&
+                !string.Equals(data.Thumbnail, "self", StringComparison.OrdinalIgnoreCase) &&
+                !string.Equals(data.Thumbnail, "nsfw", StringComparison.OrdinalIgnoreCase))
             {
                 imageUrls.Add(data.Thumbnail);
             }
         }
-
-        // Preview images
-        if (data.Preview?.Images != null && data.Preview.Images.Count > 0)
+        else
         {
-            var previewUrls = data.Preview.Images
-                .Where(img => !string.IsNullOrEmpty(img.Source?.Url))
-                .Select(img => System.Net.WebUtility.HtmlDecode(img.Source!.Url)!)
-                .Where(decodedUrl => !imageUrls.Contains(decodedUrl, StringComparer.Ordinal));
+            // Extract image URLs for non-video posts
+            if (!string.IsNullOrEmpty(data.Url))
+            {
+                // Direct image links
+                if (data.Url.EndsWith(".jpg", StringComparison.OrdinalIgnoreCase) ||
+                    data.Url.EndsWith(".jpeg", StringComparison.OrdinalIgnoreCase) ||
+                    data.Url.EndsWith(".png", StringComparison.OrdinalIgnoreCase) ||
+                    data.Url.EndsWith(".gif", StringComparison.OrdinalIgnoreCase) ||
+                    data.Url.EndsWith(".webp", StringComparison.OrdinalIgnoreCase))
+                {
+                    imageUrls.Add(data.Url);
+                }
+            }
 
-            imageUrls.AddRange(previewUrls);
+            // Preview images
+            if (data.Preview?.Images != null && data.Preview.Images.Count > 0)
+            {
+                var previewUrls = data.Preview.Images
+                    .Where(img => !string.IsNullOrEmpty(img.Source?.Url))
+                    .Select(img => System.Net.WebUtility.HtmlDecode(img.Source!.Url)!)
+                    .Where(decodedUrl => !imageUrls.Contains(decodedUrl, StringComparer.Ordinal));
+
+                imageUrls.AddRange(previewUrls);
+            }
+
+            // Thumbnail as fallback
+            if (imageUrls.Count == 0 && !string.IsNullOrEmpty(data.Thumbnail) &&
+                data.Thumbnail.StartsWith("http", StringComparison.OrdinalIgnoreCase) &&
+                !string.Equals(data.Thumbnail, "default", StringComparison.OrdinalIgnoreCase) &&
+                !string.Equals(data.Thumbnail, "self", StringComparison.OrdinalIgnoreCase) &&
+                !string.Equals(data.Thumbnail, "nsfw", StringComparison.OrdinalIgnoreCase))
+            {
+                imageUrls.Add(data.Thumbnail);
+            }
         }
 
         return new CreateSocialMediaPostDto
@@ -269,7 +307,7 @@ public sealed class RedditService
             AuthorAvatar = string.Empty, // Reddit API doesn't provide author avatars in listing
             PostUrl = $"https://reddit.com{data.Permalink}",
             ImageUrls = imageUrls.ToArray(),
-            VideoUrl = null,
+            VideoUrl = videoUrl,
             Upvotes = data.Ups ?? 0,
             Downvotes = data.Downs ?? 0,
             CommentCount = data.NumComments ?? 0,
@@ -374,6 +412,26 @@ internal sealed class RedditPostData
     public double? CreatedUtc { get; set; }
 
     public RedditPreview? Preview { get; set; }
+
+    public bool? IsVideo { get; set; }
+
+    public RedditMedia? Media { get; set; }
+
+    public string? PostHint { get; set; }
+}
+
+internal sealed class RedditMedia
+{
+    public RedditRedditVideo? RedditVideo { get; set; }
+}
+
+internal sealed class RedditRedditVideo
+{
+    public string? FallbackUrl { get; set; }
+
+    public int? Width { get; set; }
+
+    public int? Height { get; set; }
 }
 
 internal sealed class RedditPreview

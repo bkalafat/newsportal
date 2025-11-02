@@ -63,9 +63,11 @@ internal sealed class SocialMediaFetcherService : BackgroundService
 
         var redditService = scope.ServiceProvider.GetRequiredService<RedditService>();
         var socialMediaService = scope.ServiceProvider.GetRequiredService<ISocialMediaPostService>();
+        var translationService = scope.ServiceProvider.GetRequiredService<TranslationService>();
 
         int totalImported = 0;
         int totalSkipped = 0;
+        int totalFiltered = 0;
 
         // Fetch from multiple subreddits
         var subreddits = new[]
@@ -105,9 +107,35 @@ internal sealed class SocialMediaFetcherService : BackgroundService
 
                     try
                     {
-                        await socialMediaService.CreatePostAsync(post);
+                        // Check if content is Turkish
+                        var isTitleTurkish = translationService.IsTurkish(post.Title);
+                        var isContentTurkish = string.IsNullOrEmpty(post.Content) || translationService.IsTurkish(post.Content);
+
+                        // Skip if content is English (not Turkish)
+                        if (!isTitleTurkish && !isContentTurkish)
+                        {
+                            totalFiltered++;
+                            _logger.LogDebug("Filtered English post: {Title}", post.Title);
+                            continue;
+                        }
+
+                        // Translate if needed
+                        var translatedPost = post;
+                        if (!isTitleTurkish)
+                        {
+                            var translatedTitle = await translationService.TranslateToTurkishAsync(post.Title);
+                            translatedPost = post with { Title = translatedTitle, Language = "tr" };
+                        }
+
+                        if (!string.IsNullOrEmpty(post.Content) && !isContentTurkish)
+                        {
+                            var translatedContent = await translationService.TranslateToTurkishAsync(post.Content);
+                            translatedPost = translatedPost with { Content = translatedContent, Language = "tr" };
+                        }
+
+                        await socialMediaService.CreatePostAsync(translatedPost);
                         totalImported++;
-                        _logger.LogDebug("Imported post: {Title} from r/{Subreddit}", post.Title, subreddit);
+                        _logger.LogDebug("Imported post: {Title} from r/{Subreddit}", translatedPost.Title, subreddit);
                     }
                     catch (InvalidOperationException ex) when (ex.Message.Contains("already exists", StringComparison.OrdinalIgnoreCase))
                     {
@@ -128,8 +156,8 @@ internal sealed class SocialMediaFetcherService : BackgroundService
         }
 
         _logger.LogInformation(
-            "Social media fetch completed: {Imported} posts imported, {Skipped} skipped",
-            totalImported, totalSkipped);
+            "Social media fetch completed: {Imported} posts imported, {Skipped} skipped, {Filtered} English posts filtered",
+            totalImported, totalSkipped, totalFiltered);
     }
 
     public override Task StopAsync(CancellationToken cancellationToken)
