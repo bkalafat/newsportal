@@ -10,6 +10,44 @@
 - Update existing documentation rather than creating new files
 - No summary documents, completion reports, or explainer files
 
+## 🚨 Common Pitfalls & Fixes
+
+**ALWAYS check these before committing code:**
+
+### Testing Issues
+
+1. **Moq Internal Interfaces** ❌ **MUST FIX**
+   - **Problem**: Moq cannot mock internal interfaces without InternalsVisibleTo
+   - **Error**: `Castle.DynamicProxy.Generators.GeneratorException: Type is not public`
+   - **Solution**: Add to `backend/Properties/AssemblyInfo.cs`:
+     ```csharp
+     [assembly: InternalsVisibleTo("DynamicProxyGenAssembly2")]
+     ```
+
+2. **Valid Category Names** ❌ **MUST USE**
+   - **Problem**: Using "Technology" in tests when validator requires specific categories
+   - **Valid Categories**: `popular`, `artificialintelligence`, `githubcopilot`, `mcp`, `openai`, `robotics`, `deepseek`, `dotnet`, `claudeai`
+   - **Error**: `Category must be one of: popular, artificialintelligence...`
+   - **Solution**: Use `"popular"` in test data builders and validators
+
+3. **Date Property Defaults** ❌ **MUST VERIFY**
+   - **Problem**: NewsArticle entity has default DateTime.UtcNow for date properties
+   - **Properties**: `ExpressDate`, `CreateDate`, `UpdateDate` all default to `DateTime.UtcNow`
+   - **Wrong**: `news.CreateDate.Should().Be(DateTime.MinValue);`
+   - **Correct**: `news.CreateDate.Should().BeCloseTo(DateTime.UtcNow, TimeSpan.FromSeconds(1));`
+
+### Frontend Build Issues
+
+4. **Missing Closing Braces** ❌ **ALWAYS CHECK**
+   - **Problem**: Incomplete function definitions break Turbopack parsing
+   - **Error**: `'import', and 'export' cannot be used outside of module code`
+   - **Solution**: Ensure every function has proper opening and closing braces
+   - **Check**: Count `{` and `}` in exported functions
+
+5. **Duplicate Code Blocks** ❌ **NEVER DUPLICATE**
+   - **Problem**: Copy-paste errors creating duplicate closing braces/statements
+   - **Solution**: Review entire function before saving, remove duplicates
+
 ## 🎯 Quick Reference
 
 ### Architecture

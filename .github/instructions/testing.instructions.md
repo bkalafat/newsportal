@@ -6,6 +6,29 @@ applyTo: '**/Tests/**/*.cs'
 
 These instructions apply to all test files in the NewsApi.Tests project.
 
+## ⚠️ Critical Testing Rules
+
+**MUST follow these rules to avoid common test failures:**
+
+### 1. Moq Internal Interfaces
+- Moq requires `InternalsVisibleTo("DynamicProxyGenAssembly2")` in `backend/Properties/AssemblyInfo.cs`
+- Without this, mocking internal interfaces will fail with: `Castle.DynamicProxy.Generators.GeneratorException`
+
+### 2. Valid Category Values
+- **ONLY use these categories in tests**: `popular`, `artificialintelligence`, `githubcopilot`, `mcp`, `openai`, `robotics`, `deepseek`, `dotnet`, `claudeai`
+- **NEVER use**: `Technology`, `Sports`, `World`, or any other category
+- Use `"popular"` as the default test category in builders and validators
+
+### 3. Date Property Defaults
+- `NewsArticle` entity properties default to `DateTime.UtcNow`: `ExpressDate`, `CreateDate`, `UpdateDate`
+- **Wrong**: `news.CreateDate.Should().Be(DateTime.MinValue);`
+- **Correct**: `news.CreateDate.Should().BeCloseTo(DateTime.UtcNow, TimeSpan.FromSeconds(1));`
+
+### 4. Test Data Builders
+- Always use test data builders (e.g., `CreateNewsArticleDtoBuilder`, `UpdateNewsArticleDtoBuilder`)
+- Builders must use valid categories from the list above
+- Never hardcode `"Technology"` in builders
+
 ## 🧪 Testing Framework
 
 - **Test Framework**: xUnit
