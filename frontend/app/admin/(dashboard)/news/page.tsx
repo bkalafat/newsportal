@@ -185,6 +185,7 @@ export default function AdminNewsPage() {
                       sizes="(max-width: 640px) 100vw, 192px"
                       className="object-cover"
                       priority={false}
+                      unoptimized
                     />
                   </div>
                 )}

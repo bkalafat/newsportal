@@ -288,6 +288,7 @@ export default function NewsEditorPage() {
                     sizes="(max-width: 768px) 100vw, 448px"
                     className="object-contain"
                     priority={false}
+                    unoptimized
                   />
                 </div>
               </div>
