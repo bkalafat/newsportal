@@ -29,15 +29,18 @@ internal sealed class NewsDataFetcherService : INewsDataFetcherService
     private readonly HttpClient _httpClient;
     private readonly NewsApiSettings _settings;
     private readonly ILogger<NewsDataFetcherService> _logger;
+    private readonly TranslationService _translationService;
 
     public NewsDataFetcherService(
         HttpClient httpClient,
         IOptions<NewsApiSettings> settings,
-        ILogger<NewsDataFetcherService> logger)
+        ILogger<NewsDataFetcherService> logger,
+        TranslationService translationService)
     {
         _httpClient = httpClient ?? throw new ArgumentNullException(nameof(httpClient));
         _settings = settings?.Value ?? throw new ArgumentNullException(nameof(settings));
         _logger = logger ?? throw new ArgumentNullException(nameof(logger));
+        _translationService = translationService ?? throw new ArgumentNullException(nameof(translationService));
     }
 
     public async Task<List<CreateNewsArticleDto>> FetchLatestNewsAsync(CancellationToken cancellationToken = default)
@@ -112,7 +115,7 @@ internal sealed class NewsDataFetcherService : INewsDataFetcherService
                 return articles;
             }
 
-            // Convert NewsAPI articles to our DTOs
+            // Convert NewsAPI articles to our DTOs and filter Turkish only
             foreach (var article in result.Articles)
             {
                 if (cancellationToken.IsCancellationRequested)
@@ -122,6 +125,18 @@ internal sealed class NewsDataFetcherService : INewsDataFetcherService
 
                 try
                 {
+                    // Check if content is Turkish
+                    var isTitleTurkish = _translationService.IsTurkish(article.Title ?? string.Empty);
+                    var isDescriptionTurkish = string.IsNullOrEmpty(article.Description) ||
+                                               _translationService.IsTurkish(article.Description);
+
+                    // Skip if content is English (not Turkish) - we only want Turkish news
+                    if (!isTitleTurkish && !isDescriptionTurkish)
+                    {
+                        _logger.LogDebug("Filtered English article: {Title}", article.Title);
+                        continue;
+                    }
+
                     var dto = MapToCreateDto(article, category);
                     if (dto != null)
                     {

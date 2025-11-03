@@ -5,8 +5,8 @@ import { LatestNews } from "@/components/home/latest-news";
 import { CategoriesSection } from "@/components/home/categories-section";
 import { Metadata } from "next";
 
-// ISR: Revalidate every 5 minutes for fresh Reddit news
-export const revalidate = 300; // 5 minutes
+// ISR: Revalidate every 3 hours for fresh Reddit news
+export const revalidate = 10800; // 3 hours (10800 seconds)
 
 export const metadata: Metadata = {
   alternates: {

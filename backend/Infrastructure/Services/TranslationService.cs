@@ -179,6 +179,40 @@ public sealed class TranslationService
         return "en"; // Assume English
     }
 
+    /// <summary>
+    /// Check if text is in Turkish
+    /// </summary>
+    public bool IsTurkish(string text)
+    {
+        if (string.IsNullOrWhiteSpace(text))
+        {
+            return false;
+        }
+
+        // Check for Turkish-specific characters
+        var turkishChars = new HashSet<char> { 'ı', 'ğ', 'ü', 'ş', 'ö', 'ç', 'İ', 'Ğ', 'Ü', 'Ş', 'Ö', 'Ç' };
+        
+        // Count Turkish characters
+        int turkishCharCount = 0;
+        int totalChars = 0;
+
+        foreach (var c in text)
+        {
+            if (char.IsLetter(c))
+            {
+                totalChars++;
+                if (turkishChars.Contains(c))
+                {
+                    turkishCharCount++;
+                }
+            }
+        }
+
+        // If we have at least one Turkish character, consider it Turkish
+        // This is a simple heuristic that works well for mixed content
+        return turkishCharCount > 0;
+    }
+
     #region DTO Classes
 
     private class MyMemoryResponse
