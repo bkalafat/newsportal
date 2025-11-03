@@ -76,22 +76,22 @@ internal sealed class SocialMediaFetcherService : BackgroundService
             ("github", "copilot", "GitHub Copilot discussions"),
             ("programming", "copilot OR \"github copilot\"", "Programming community"),
             ("webdev", "copilot", "Web development"),
-            
+
             // Artificial Intelligence
             ("artificial", string.Empty, "AI general discussions"),
             ("MachineLearning", string.Empty, "Machine Learning community"),
             ("ArtificialInteligence", string.Empty, "AI specific community"),
             ("singularity", string.Empty, "AI singularity discussions"),
-            
+
             // OpenAI
             ("OpenAI", string.Empty, "OpenAI official community"),
             ("ChatGPT", string.Empty, "ChatGPT discussions"),
             ("ChatGPTCoding", string.Empty, "ChatGPT for coding"),
-            
+
             // Claude AI
             ("ClaudeAI", string.Empty, "Claude AI discussions"),
             ("Anthropic", string.Empty, "Anthropic/Claude community"),
-            
+
             // General AI/LLM
             ("LocalLLaMA", string.Empty, "Local LLM discussions"),
             ("Oobabooga", string.Empty, "LLM tools and models"),

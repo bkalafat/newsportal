@@ -115,7 +115,7 @@ internal sealed class NewsDataFetcherService : INewsDataFetcherService
                 return articles;
             }
 
-            // Convert NewsAPI articles to our DTOs and filter Turkish only
+            // Convert NewsAPI articles to our DTOs with Turkish translation
             foreach (var article in result.Articles)
             {
                 if (cancellationToken.IsCancellationRequested)
@@ -126,7 +126,7 @@ internal sealed class NewsDataFetcherService : INewsDataFetcherService
                 try
                 {
                     // Convert article to DTO and translate to Turkish if needed
-                    var dto = await MapToCreateDtoAsync(article, category, cancellationToken);
+                    var dto = await MapToCreateDtoAsync(article, category, cancellationToken).ConfigureAwait(false);
                     if (dto != null)
                     {
                         articles.Add(dto);
@@ -134,7 +134,7 @@ internal sealed class NewsDataFetcherService : INewsDataFetcherService
                 }
                 catch (Exception ex)
                 {
-                    _logger.LogWarning(ex, "Failed to map article: {Title}", article.Title);
+                    _logger.LogWarning(ex, "Failed to translate or map article: {Title}", article.Title);
                 }
             }
         }
@@ -175,14 +175,14 @@ internal sealed class NewsDataFetcherService : INewsDataFetcherService
             try
             {
                 _logger.LogInformation("Translating article to Turkish: {Title}", article.Title);
-                
+
                 turkishTitle = await _translationService.TranslateToTurkishAsync(article.Title, sourceLanguage);
-                
+
                 if (!string.IsNullOrEmpty(article.Description))
                 {
                     turkishDescription = await _translationService.TranslateToTurkishAsync(article.Description, sourceLanguage);
                 }
-                
+
                 if (!string.IsNullOrEmpty(article.Content))
                 {
                     turkishContent = await _translationService.TranslateToTurkishAsync(article.Content, sourceLanguage);
