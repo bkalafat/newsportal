@@ -125,19 +125,8 @@ internal sealed class NewsDataFetcherService : INewsDataFetcherService
 
                 try
                 {
-                    // Check if content is Turkish
-                    var isTitleTurkish = _translationService.IsTurkish(article.Title ?? string.Empty);
-                    var isDescriptionTurkish = string.IsNullOrEmpty(article.Description) ||
-                                               _translationService.IsTurkish(article.Description);
-
-                    // Skip if content is English (not Turkish) - we only want Turkish news
-                    if (!isTitleTurkish && !isDescriptionTurkish)
-                    {
-                        _logger.LogDebug("Filtered English article: {Title}", article.Title);
-                        continue;
-                    }
-
-                    var dto = MapToCreateDto(article, category);
+                    // Convert article to DTO and translate to Turkish if needed
+                    var dto = await MapToCreateDtoAsync(article, category, cancellationToken);
                     if (dto != null)
                     {
                         articles.Add(dto);
@@ -161,14 +150,56 @@ internal sealed class NewsDataFetcherService : INewsDataFetcherService
         return articles;
     }
 
-    private static CreateNewsArticleDto? MapToCreateDto(NewsApiArticle article, string category)
+    private async Task<CreateNewsArticleDto?> MapToCreateDtoAsync(
+        NewsApiArticle article,
+        string category,
+        CancellationToken cancellationToken)
     {
         // Skip articles without title or content
         if (string.IsNullOrWhiteSpace(article.Title) ||
             string.IsNullOrWhiteSpace(article.Description) ||
-string.Equals(article.Title, "[Removed]", StringComparison.Ordinal))
+            string.Equals(article.Title, "[Removed]", StringComparison.Ordinal))
         {
             return null;
+        }
+
+        // Detect language and translate to Turkish if needed
+        var sourceLanguage = _translationService.DetectLanguage(article.Title);
+        string turkishTitle = article.Title;
+        string turkishDescription = article.Description ?? article.Title;
+        string turkishContent = article.Content ?? article.Description ?? article.Title;
+
+        // Always translate non-Turkish content to Turkish
+        if (sourceLanguage != "tr")
+        {
+            try
+            {
+                _logger.LogInformation("Translating article to Turkish: {Title}", article.Title);
+                
+                turkishTitle = await _translationService.TranslateToTurkishAsync(article.Title, sourceLanguage);
+                
+                if (!string.IsNullOrEmpty(article.Description))
+                {
+                    turkishDescription = await _translationService.TranslateToTurkishAsync(article.Description, sourceLanguage);
+                }
+                
+                if (!string.IsNullOrEmpty(article.Content))
+                {
+                    turkishContent = await _translationService.TranslateToTurkishAsync(article.Content, sourceLanguage);
+                }
+
+                // Validate translation produced Turkish content
+                if (!_translationService.IsTurkish(turkishTitle))
+                {
+                    _logger.LogWarning("Translation failed to produce Turkish content for: {Title}", article.Title);
+                    return null;
+                }
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "Translation failed for article: {Title}", article.Title);
+                return null;
+            }
         }
 
         // Map NewsAPI category to our internal categories
@@ -178,16 +209,16 @@ string.Equals(article.Title, "[Removed]", StringComparison.Ordinal))
         {
             Category = mappedCategory,
             Type = "Genel",
-            Caption = TruncateString(article.Title, 500),
-            Keywords = string.Join(", ", ExtractKeywords(article.Title)),
+            Caption = TruncateString(turkishTitle, 500),
+            Keywords = string.Join(", ", ExtractKeywords(turkishTitle)),
             SocialTags = string.Empty,
-            Summary = TruncateString(article.Description != null ? article.Description : article.Title, 2000),
+            Summary = TruncateString(turkishDescription, 2000),
             ImgPath = string.Empty,
-            ImgAlt = TruncateString(article.Title, 200),
+            ImgAlt = TruncateString(turkishTitle, 200),
             ImageUrl = article.UrlToImage ?? string.Empty,
             ThumbnailUrl = article.UrlToImage ?? string.Empty,
-            Content = BuildContent(article),
-            Subjects = ExtractKeywords(article.Title),
+            Content = BuildTurkishContent(turkishContent, article),
+            Subjects = ExtractKeywords(turkishTitle),
             Authors = string.IsNullOrWhiteSpace(article.Author)
                 ? ["NewsAPI"]
                 : [TruncateString(article.Author, 100)],
@@ -200,9 +231,9 @@ string.Equals(article.Title, "[Removed]", StringComparison.Ordinal))
         };
     }
 
-    private static string BuildContent(NewsApiArticle article)
+    private static string BuildTurkishContent(string translatedContent, NewsApiArticle article)
     {
-        var content = article.Content ?? article.Description ?? string.Empty;
+        var content = translatedContent;
 
         // NewsAPI often truncates content with [+X chars], so add source link
         var sourceLink = $"\n\n<p>Kaynak: <a href=\"{article.Url}\" target=\"_blank\" rel=\"noopener noreferrer\">{article.Source?.Name ?? "Haber Kaynağı"}</a></p>";

@@ -29,11 +29,11 @@ internal static class SeedNewsData
         var now = DateTime.UtcNow;
         var newsArticles = new List<NewsArticle>
         {
-            // GitHub News - Real from Reddit (Top rated)
+            // GitHub News - Gerçek Reddit Haberleri (En Yüksek Puanlılar)
             new NewsArticle
             {
-                Category = "Technology",
-                Type = "news",
+                Category = "Teknoloji",
+                Type = "haber",
                 Caption = "GitHub Enterprise Cloud Çift Ücretlendirme Sorunu",
                 Slug = SlugHelper.GenerateSlug("GitHub Enterprise Cloud Çift Ücretlendirme Sorunu"),
                 Keywords = "github, enterprise, billing, support, cloud",
@@ -72,8 +72,8 @@ internal static class SeedNewsData
             },
             new NewsArticle
             {
-                Category = "Technology",
-                Type = "news",
+                Category = "Teknoloji",
+                Type = "haber",
                 Caption = "GitHub Ana Sayfasında Activity Bölümü Kayboldu",
                 Slug = SlugHelper.GenerateSlug("GitHub Ana Sayfasında Activity Bölümü Kayboldu"),
                 Keywords = "github, activity, sidebar, bug, SSO",
@@ -104,8 +104,8 @@ internal static class SeedNewsData
             },
             new NewsArticle
             {
-                Category = "Technology",
-                Type = "news",
+                Category = "Teknoloji",
+                Type = "haber",
                 Caption = "GitHub Copilot Actions PR'larda Çöktü mü?",
                 Slug = SlugHelper.GenerateSlug("GitHub Copilot Actions PR'larda Çöktü mü"),
                 Keywords = "github, copilot, actions, billing, error",
@@ -147,8 +147,8 @@ internal static class SeedNewsData
             // Reddit News - Web Development
             new NewsArticle
             {
-                Category = "Technology",
-                Type = "discussion",
+                Category = "Teknoloji",
+                Type = "tartışma",
                 Caption = "Copilot'u Kapattıktan Sonra Kodlamanın Ne Kadar Stresli Olduğunu Fark Ettim",
                 Slug = SlugHelper.GenerateSlug("Copilot'u Kapattıktan Sonra Kodlamanın Ne Kadar Stresli Olduğunu Fark Ettim"),
                 Keywords = "copilot, AI, coding, stress, productivity",
@@ -190,8 +190,8 @@ internal static class SeedNewsData
             },
             new NewsArticle
             {
-                Category = "Technology",
-                Type = "discussion",
+                Category = "Teknoloji",
+                Type = "tartışma",
                 Caption = "Kişisel vs Kurumsal GitHub Hesapları Güvenlik Sorunu",
                 Slug = SlugHelper.GenerateSlug("Kişisel vs Kurumsal GitHub Hesapları Güvenlik Sorunu"),
                 Keywords = "github, security, DLP, enterprise, personal account",
@@ -230,8 +230,8 @@ internal static class SeedNewsData
             },
             new NewsArticle
             {
-                Category = "Technology",
-                Type = "question",
+                Category = "Teknoloji",
+                Type = "soru",
                 Caption = "GitHub Copilot Pro Ücretsiz Erişimi Kaybedilebilir mi?",
                 Slug = SlugHelper.GenerateSlug("GitHub Copilot Pro Ücretsiz Erişimi Kaybedilebilir mi"),
                 Keywords = "copilot, pro, free, open source, eligibility",
@@ -274,8 +274,8 @@ internal static class SeedNewsData
             // Technology News
             new NewsArticle
             {
-                Category = "Technology",
-                Type = "news",
+                Category = "Teknoloji",
+                Type = "haber",
                 Caption = "Yapay Zeka Kodlama Araçları: Copilot vs Cursor vs Cline",
                 Slug = SlugHelper.GenerateSlug("Yapay Zeka Kodlama Araçları Copilot vs Cursor vs Cline"),
                 Keywords = "AI, coding, copilot, cursor, cline, development tools",
@@ -353,8 +353,8 @@ internal static class SeedNewsData
             // Twitter/X News
             new NewsArticle
             {
-                Category = "Entertainment",
-                Type = "news",
+                Category = "Eğlence",
+                Type = "haber",
                 Caption = "X (Twitter) Yeni Algoritma Güncellemesi: Uzun İçerikler Ön Planda",
                 Slug = SlugHelper.GenerateSlug("X Twitter Yeni Algoritma Güncellemesi Uzun İçerikler Ön Planda"),
                 Keywords = "twitter, X, algorithm, long form, content",
@@ -405,8 +405,8 @@ internal static class SeedNewsData
             },
             new NewsArticle
             {
-                Category = "Entertainment",
-                Type = "news",
+                Category = "Eğlence",
+                Type = "haber",
                 Caption = "Twitter Spaces'te Yeni Özellik: Kayıt ve Tekrar İzleme",
                 Slug = SlugHelper.GenerateSlug("Twitter Spaces'te Yeni Özellik Kayıt ve Tekrar İzleme"),
                 Keywords = "twitter, spaces, recording, replay, audio",
@@ -459,8 +459,8 @@ internal static class SeedNewsData
             // LinkedIn News
             new NewsArticle
             {
-                Category = "Business",
-                Type = "news",
+                Category = "İş",
+                Type = "haber",
                 Caption = "LinkedIn'de AI Powered İş İlanları Dönemi Başladı",
                 Slug = SlugHelper.GenerateSlug("LinkedIn'de AI Powered İş İlanları Dönemi Başladı"),
                 Keywords = "linkedin, AI, job posting, recruitment, hiring",
@@ -522,8 +522,8 @@ internal static class SeedNewsData
             },
             new NewsArticle
             {
-                Category = "Business",
-                Type = "news",
+                Category = "İş",
+                Type = "haber",
                 Caption = "LinkedIn Learning: 2025'te En Çok Talep Gören 10 Skill",
                 Slug = SlugHelper.GenerateSlug("LinkedIn Learning 2025'te En Çok Talep Gören 10 Skill"),
                 Keywords = "linkedin, learning, skills, career, education",
@@ -599,8 +599,8 @@ internal static class SeedNewsData
             // Facebook News
             new NewsArticle
             {
-                Category = "Entertainment",
-                Type = "news",
+                Category = "Eğlence",
+                Type = "haber",
                 Caption = "Meta AI Artık WhatsApp, Instagram ve Facebook'ta Entegre",
                 Slug = SlugHelper.GenerateSlug("Meta AI Artık WhatsApp Instagram ve Facebook'ta Entegre"),
                 Keywords = "meta, AI, whatsapp, instagram, facebook, integration",
@@ -667,8 +667,8 @@ internal static class SeedNewsData
             // Instagram News
             new NewsArticle
             {
-                Category = "Entertainment",
-                Type = "news",
+                Category = "Eğlence",
+                Type = "haber",
                 Caption = "Instagram Reels Artık 10 Dakikaya Kadar Uzun Olabiliyor",
                 Slug = SlugHelper.GenerateSlug("Instagram Reels Artık 10 Dakikaya Kadar Uzun Olabiliyor"),
                 Keywords = "instagram, reels, video, content, creator",
@@ -743,8 +743,8 @@ internal static class SeedNewsData
             // TikTok News
             new NewsArticle
             {
-                Category = "Entertainment",
-                Type = "news",
+                Category = "Eğlence",
+                Type = "haber",
                 Caption = "TikTok Shop Türkiye'de Açılıyor: E-Ticaretin Yeni Dönemi",
                 Slug = SlugHelper.GenerateSlug("TikTok Shop Türkiye'de Açılıyor E-Ticaretin Yeni Dönemi"),
                 Keywords = "tiktok, shop, e-commerce, turkey, shopping",
@@ -827,8 +827,8 @@ internal static class SeedNewsData
             // YouTube News
             new NewsArticle
             {
-                Category = "Entertainment",
-                Type = "news",
+                Category = "Eğlence",
+                Type = "haber",
                 Caption = "YouTube Premium Türkiye'de Fiyat Artışı: Yeni Tarifeler Açıklandı",
                 Slug = SlugHelper.GenerateSlug("YouTube Premium Türkiye'de Fiyat Artışı Yeni Tarifeler Açıklandı"),
                 Keywords = "youtube, premium, pricing, turkey, subscription",

@@ -26,15 +26,15 @@ export function HeroSection() {
           <p className="text-muted-foreground text-lg md:text-xl lg:text-2xl max-w-2xl mx-auto font-light">
             {t("subtitle")}
           </p>
-          <div className="flex justify-center pt-2">
+          <div className="flex justify-center pt-4">
             <Button 
               asChild 
-              size="default" 
-              className="group bg-gradient-to-r from-primary to-primary/80 hover:from-primary/90 hover:to-primary/70 shadow-lg shadow-primary/25"
+              size="lg" 
+              className="group bg-gradient-to-r from-primary to-primary/80 hover:from-primary/90 hover:to-primary/70 shadow-lg shadow-primary/25 px-8 py-6 text-lg font-semibold"
             >
               <Link href="#latest">
                 {t("cta")}
-                <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
+                <ArrowRight className="ml-2 h-5 w-5 transition-transform group-hover:translate-x-1" />
               </Link>
             </Button>
           </div>

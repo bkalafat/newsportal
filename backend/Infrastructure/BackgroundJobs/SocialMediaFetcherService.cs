@@ -72,10 +72,29 @@ internal sealed class SocialMediaFetcherService : BackgroundService
         // Fetch from multiple subreddits
         var subreddits = new[]
         {
+            // GitHub Copilot
             ("github", "copilot", "GitHub Copilot discussions"),
             ("programming", "copilot OR \"github copilot\"", "Programming community"),
             ("webdev", "copilot", "Web development"),
-            ("MachineLearning", "copilot", "AI/ML community"),
+            
+            // Artificial Intelligence
+            ("artificial", string.Empty, "AI general discussions"),
+            ("MachineLearning", string.Empty, "Machine Learning community"),
+            ("ArtificialInteligence", string.Empty, "AI specific community"),
+            ("singularity", string.Empty, "AI singularity discussions"),
+            
+            // OpenAI
+            ("OpenAI", string.Empty, "OpenAI official community"),
+            ("ChatGPT", string.Empty, "ChatGPT discussions"),
+            ("ChatGPTCoding", string.Empty, "ChatGPT for coding"),
+            
+            // Claude AI
+            ("ClaudeAI", string.Empty, "Claude AI discussions"),
+            ("Anthropic", string.Empty, "Anthropic/Claude community"),
+            
+            // General AI/LLM
+            ("LocalLLaMA", string.Empty, "Local LLM discussions"),
+            ("Oobabooga", string.Empty, "LLM tools and models"),
         };
 
         foreach (var (subreddit, query, description) in subreddits)
@@ -87,14 +106,26 @@ internal sealed class SocialMediaFetcherService : BackgroundService
 
             try
             {
-                _logger.LogInformation("Fetching posts from r/{Subreddit} about '{Query}'", subreddit, query);
+                List<CreateSocialMediaPostDto> posts;
 
-                var posts = await redditService.SearchPostsAsync(
-                    subreddit,
-                    query,
-                    "top",
-                    "day", // Last 24 hours
-                    25);
+                if (string.IsNullOrEmpty(query))
+                {
+                    _logger.LogInformation("Fetching top posts from r/{Subreddit}", subreddit);
+                    posts = await redditService.GetTopPostsAsync(
+                        subreddit,
+                        "day", // Last 24 hours
+                        25);
+                }
+                else
+                {
+                    _logger.LogInformation("Fetching posts from r/{Subreddit} about '{Query}'", subreddit, query);
+                    posts = await redditService.SearchPostsAsync(
+                        subreddit,
+                        query,
+                        "top",
+                        "day", // Last 24 hours
+                        25);
+                }
 
                 _logger.LogInformation("Fetched {Count} posts from r/{Subreddit}", posts.Count, subreddit);
 

@@ -29,7 +29,7 @@ internal static class SeedRedditNewsData
             new NewsArticle
             {
                 Category = "github",
-                Type = "news",
+                Type = "haber",
                 Caption = "GitHub Enterprise Cloud Faturalandırma Sorunu: İki Kat Ödeme",
                 Slug = SlugHelper.GenerateSlug("GitHub Enterprise Cloud Faturalandırma Sorunu: İki Kat Ödeme"),
                 Keywords = "github enterprise, faturalandırma, copilot, cloud, destek",
@@ -101,7 +101,7 @@ internal static class SeedRedditNewsData
             new NewsArticle
             {
                 Category = "reddit",
-                Type = "news",
+                Type = "haber",
                 Caption = "Geliştirici: 'GitHub Copilot Olmadan Kodlamak Daha Az Stresli'",
                 Slug = SlugHelper.GenerateSlug("Geliştirici: 'GitHub Copilot Olmadan Kodlamak Daha Az Stresli'"),
                 Keywords = "github copilot, AI kod geliştirme, verimlilik, stres, kod editörü",
@@ -194,7 +194,7 @@ internal static class SeedRedditNewsData
             new NewsArticle
             {
                 Category = "github",
-                Type = "news",
+                Type = "haber",
                 Caption = "GitHub Copilot Pro Ücretsiz Erişimi Kaybetme Endişesi",
                 Slug = SlugHelper.GenerateSlug("GitHub Copilot Pro Ücretsiz Erişimi Kaybetme Endişesi"),
                 Keywords = "github copilot, ücretsiz erişim, açık kaynak, uygunluk kriteri",
@@ -290,7 +290,7 @@ internal static class SeedRedditNewsData
             new NewsArticle
             {
                 Category = "github",
-                Type = "news",
+                Type = "haber",
                 Caption = "GitHub Hesap Politikası: Kişisel mi İş için mi?",
                 Slug = SlugHelper.GenerateSlug("GitHub Hesap Politikası: Kişisel mi İş için mi?"),
                 Keywords = "github, hesap politikası, enterprise, güvenlik, DLP",
@@ -425,7 +425,7 @@ internal static class SeedRedditNewsData
             new NewsArticle
             {
                 Category = "github",
-                Type = "news",
+                Type = "haber",
                 Caption = "GitHub Ana Sayfa Kenar Çubuğunda Aktivite Bölümü Kayboldu",
                 Slug = SlugHelper.GenerateSlug("GitHub Ana Sayfa Kenar Çubuğunda Aktivite Bölümü Kayboldu"),
                 Keywords = "github, UI bug, aktivite bölümü, SSO, kullanıcı arayüzü",
