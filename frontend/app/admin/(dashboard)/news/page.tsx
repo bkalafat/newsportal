@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
@@ -176,11 +177,14 @@ export default function AdminNewsPage() {
               <div className="flex flex-col sm:flex-row">
                 {/* Image */}
                 {item.imageUrl && (
-                  <div className="h-48 w-full flex-shrink-0 bg-slate-200 sm:h-auto sm:w-48 dark:bg-slate-800">
-                    <img
+                  <div className="relative h-48 w-full flex-shrink-0 bg-slate-200 sm:h-auto sm:w-48 dark:bg-slate-800">
+                    <Image
                       src={item.imageUrl}
                       alt={item.title}
-                      className="h-full w-full object-cover"
+                      fill
+                      sizes="(max-width: 640px) 100vw, 192px"
+                      className="object-cover"
+                      priority={false}
                     />
                   </div>
                 )}

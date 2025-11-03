@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
+import Image from "next/image";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
@@ -279,14 +280,16 @@ export default function NewsEditorPage() {
             {formData.imageUrl && (
               <div className="rounded-lg border p-4">
                 <p className="mb-2 text-sm font-medium">Görsel Önizleme:</p>
-                <img
-                  src={formData.imageUrl}
-                  alt={formData.imgAlt || "Preview"}
-                  className="w-full max-w-md rounded-lg"
-                  onError={(e) => {
-                    e.currentTarget.src = "/placeholder.png";
-                  }}
-                />
+                <div className="relative h-64 w-full max-w-md overflow-hidden rounded-lg">
+                  <Image
+                    src={formData.imageUrl}
+                    alt={formData.imgAlt || "Preview"}
+                    fill
+                    sizes="(max-width: 768px) 100vw, 448px"
+                    className="object-contain"
+                    priority={false}
+                  />
+                </div>
               </div>
             )}
           </CardContent>
