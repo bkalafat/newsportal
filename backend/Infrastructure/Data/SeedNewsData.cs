@@ -826,7 +826,7 @@ internal static class SeedNewsData
                 IsSecondPageNews = false,
             },
 
-            // CLAUDEAI CATEGORY
+            // Additional AI article
             new NewsArticle
             {
                 Category = "artificialintelligence",
