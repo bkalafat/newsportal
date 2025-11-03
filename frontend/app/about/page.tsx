@@ -145,15 +145,6 @@ export default function AboutPage() {
 
           {/* Features */}
           <div className="mb-12">
-            <h2 className="mb-6 text-center text-3xl font-bold">Özellikler</h2>
-            <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
-              {features.map((feature) => {
-                const Icon = feature.icon;
-                return (
-                  <Card key={feature.title}>
-                    <CardHeader>
-          {/* Features */}
-          <div className="mb-12">
             <h2 className="mb-6 text-center text-3xl font-bold">Nasıl Çalışır?</h2>
             <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
               {features.map((feature) => {
@@ -223,7 +214,7 @@ export default function AboutPage() {
               </div>
             </CardContent>
           </Card>
-          </div>
+
           {/* Footer */}
           <div className="text-muted-foreground mt-12 text-center">
             <p className="text-sm">
@@ -236,3 +227,9 @@ export default function AboutPage() {
               &copy; {new Date().getFullYear()} Teknoloji Haberleri. Tüm hakları saklıdır.
             </p>
           </div>
+        </div>
+      </main>
+      <Footer />
+    </div>
+  );
+}
