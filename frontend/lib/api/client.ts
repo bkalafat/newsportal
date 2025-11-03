@@ -18,13 +18,38 @@ class NewsApiClient {
       headers: {
         "Content-Type": "application/json",
       },
-      timeout: 60000, // 60 seconds - increased for large datasets
+      timeout: 90000, // 90 seconds - allows time for Azure Container Apps to scale from zero
+      withCredentials: false, // Ensure CORS preflight works correctly
     });
 
     // Response interceptor for error handling
     this.client.interceptors.response.use(
       (response) => response,
-      (error: AxiosError<ApiError>) => {
+      async (error: AxiosError<ApiError>) => {
+        // Handle 503 Service Unavailable (Azure Container Apps cold start)
+        if (error.response?.status === 503) {
+          const apiError: ApiError = {
+            message: "Backend is starting up (cold start). This usually takes 10-30 seconds. Please refresh the page.",
+            statusCode: 503,
+            errors: error.response?.data?.errors,
+          };
+          console.warn("Backend is scaling from zero. Cold start detected.");
+          return Promise.reject(apiError);
+        }
+
+        // Handle network errors (CORS, connection refused, etc.)
+        if (!error.response) {
+          const apiError: ApiError = {
+            message: error.code === "ECONNABORTED" 
+              ? "Request timeout. Backend might be starting up or experiencing high load."
+              : "Unable to connect to backend. Please check your internet connection or try again later.",
+            statusCode: 0,
+            errors: error.response?.data?.errors,
+          };
+          console.error("Network error:", error.message);
+          return Promise.reject(apiError);
+        }
+
         const apiError: ApiError = {
           message: error.response?.data?.message || error.message || "An error occurred",
           statusCode: error.response?.status || 500,

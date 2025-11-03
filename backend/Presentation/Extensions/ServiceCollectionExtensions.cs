@@ -146,11 +146,16 @@ internal static class ServiceCollectionExtensions
                         .WithOrigins(
                             "http://localhost:3000",
                             "http://localhost:3001",
-                            "https://teknohaber.netlify.app"
+                            "http://localhost:5173", // Vite dev server
+                            "https://teknohaber.netlify.app",
+                            "https://*.netlify.app" // Netlify preview deployments
                         )
+                        .SetIsOriginAllowedToAllowWildcardSubdomains()
                         .AllowAnyMethod()
                         .AllowAnyHeader()
-                        .AllowCredentials();
+                        .WithExposedHeaders("Content-Length", "Content-Type")
+                        .SetPreflightMaxAge(TimeSpan.FromMinutes(10));
+                    // Remove AllowCredentials() as it's not needed and causes CORS issues with wildcards
                 }
             );
         });
