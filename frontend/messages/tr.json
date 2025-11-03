@@ -1,6 +1,6 @@
 {
   "app": {
-    "title": "Teknoloji Haberleri",
+    "title": "TeknoHaber",
     "description": "Türkiye'nin en güncel teknoloji haberleri",
     "tagline": "Teknoloji dünyasından son haberler"
   },
@@ -38,8 +38,8 @@
   },
   "home": {
     "hero": {
-      "title": "Türkiye'nin Teknoloji Gazetesi",
-      "subtitle": "Güvenilir kaynaklardan son dakika teknoloji haberleri",
+      "title": "TeknoHaber",
+      "subtitle": "Türkiye'nin teknoloji gazetesi - Güvenilir kaynaklardan son dakika haberleri",
       "cta": "Haberleri Keşfet"
     },
     "latest": "Son Haberler",

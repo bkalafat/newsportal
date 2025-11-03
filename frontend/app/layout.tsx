@@ -14,29 +14,30 @@ const inter = Inter({
 
 export const metadata: Metadata = {
   title: {
-    default: "Teknoloji Haberleri - Türkiye'nin Teknoloji Gazetesi",
-    template: "%s | Teknoloji Haberleri",
+    default: "TeknoHaber - Türkiye'nin Teknoloji Gazetesi",
+    template: "%s | TeknoHaber",
   },
   description:
-    "Son dakika teknoloji haberleri, güncel gelişmeler, yazılım, donanım, yapay zeka, siber güvenlik ve teknoloji dünyasından tüm haberler. Türkiye'nin öncü teknoloji haber platformu.",
+    "Son dakika teknoloji haberleri, güncel gelişmeler, yapay zeka, yazılım, donanım ve teknoloji dünyasından tüm haberler. TeknoHaber ile teknolojinin nabzını tutun!",
   generator: "Next.js",
   keywords: [
+    "teknohaber",
     "teknoloji haberleri",
     "güncel haberler",
+    "yapay zeka",
     "yazılım haberleri",
     "teknoloji",
     "haberler",
     "Türkiye",
-    "yapay zeka",
     "siber güvenlik",
     "donanım",
     "mobil",
     "bilim",
     "inovasyon",
   ],
-  authors: [{ name: "Teknoloji Haberleri Editörleri", url: "https://teknoloji-haberleri.com" }],
-  creator: "Teknoloji Haberleri",
-  publisher: "Teknoloji Haberleri",
+  authors: [{ name: "TeknoHaber Editörleri", url: "https://teknohaber.netlify.app" }],
+  creator: "TeknoHaber",
+  publisher: "TeknoHaber",
   category: "technology",
   classification: "Technology News",
   formatDetection: {
@@ -44,7 +45,7 @@ export const metadata: Metadata = {
     address: false,
     telephone: false,
   },
-  metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL || "http://localhost:3000"),
+  metadataBase: new URL("https://teknohaber.netlify.app"),
   alternates: {
     canonical: "/",
     languages: {
@@ -54,28 +55,28 @@ export const metadata: Metadata = {
   openGraph: {
     type: "website",
     locale: "tr_TR",
-    url: "/",
-    siteName: "Teknoloji Haberleri",
-    title: "Teknoloji Haberleri - Türkiye'nin Teknoloji Gazetesi",
+    url: "https://teknohaber.netlify.app",
+    siteName: "TeknoHaber",
+    title: "TeknoHaber - Türkiye'nin Teknoloji Gazetesi",
     description:
-      "Son dakika teknoloji haberleri, güncel gelişmeler, yazılım, donanım, yapay zeka ve teknoloji dünyasından tüm haberler.",
+      "Son dakika teknoloji haberleri, güncel gelişmeler, yapay zeka, yazılım, donanım ve teknoloji dünyasından tüm haberler. TeknoHaber ile teknolojinin nabzını tutun!",
     images: [
       {
-        url: "/og-image.png",
+        url: "https://teknohaber.netlify.app/og-image.png",
         width: 1200,
         height: 630,
-        alt: "Teknoloji Haberleri - Türkiye'nin Teknoloji Gazetesi",
+        alt: "TeknoHaber - Türkiye'nin Teknoloji Gazetesi",
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    site: "@teknoloji_haber",
-    creator: "@teknoloji_haber",
-    title: "Teknoloji Haberleri - Türkiye'nin Teknoloji Gazetesi",
+    site: "@teknohaber_tr",
+    creator: "@teknohaber_tr",
+    title: "TeknoHaber - Türkiye'nin Teknoloji Gazetesi",
     description:
-      "Son dakika teknoloji haberleri, güncel gelişmeler, yazılım, donanım, yapay zeka ve teknoloji dünyasından tüm haberler.",
-    images: ["/og-image.png"],
+      "Son dakika teknoloji haberleri, güncel gelişmeler, yapay zeka, yazılım, donanım ve teknoloji dünyasından tüm haberler.",
+    images: ["https://teknohaber.netlify.app/og-image.png"],
   },
   robots: {
     index: true,
@@ -105,17 +106,17 @@ export default async function RootLayout({
   children: React.ReactNode;
 }>) {
   const messages = await getMessages();
-  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "http://localhost:3000";
+  const siteUrl = "https://teknohaber.netlify.app";
 
   // JSON-LD structured data for the website
   const websiteSchema = {
     "@context": "https://schema.org",
     "@type": "WebSite",
-    name: "Teknoloji Haberleri",
+    name: "TeknoHaber",
     alternateName: "Türkiye'nin Teknoloji Gazetesi",
     url: siteUrl,
     description:
-      "Son dakika teknoloji haberleri, güncel gelişmeler, yazılım, donanım, yapay zeka ve teknoloji dünyasından tüm haberler.",
+      "Son dakika teknoloji haberleri, güncel gelişmeler, yapay zeka, yazılım, donanım ve teknoloji dünyasından tüm haberler. TeknoHaber ile teknolojinin nabzını tutun!",
     inLanguage: "tr-TR",
     potentialAction: {
       "@type": "SearchAction",
@@ -127,7 +128,7 @@ export default async function RootLayout({
     },
     publisher: {
       "@type": "Organization",
-      name: "Teknoloji Haberleri",
+      name: "TeknoHaber",
       url: siteUrl,
       logo: {
         "@type": "ImageObject",
@@ -141,15 +142,15 @@ export default async function RootLayout({
   const organizationSchema = {
     "@context": "https://schema.org",
     "@type": "Organization",
-    name: "Teknoloji Haberleri",
+    name: "TeknoHaber",
     url: siteUrl,
     logo: `${siteUrl}/og-image.png`,
     description:
-      "Türkiye'nin öncü teknoloji haber platformu. Yazılım, donanım, yapay zeka, siber güvenlik ve teknoloji dünyasından güncel haberler.",
+      "Türkiye'nin öncü teknoloji haber platformu. Yapay zeka, yazılım, donanım, siber güvenlik ve teknoloji dünyasından güncel haberler.",
     sameAs: [
-      "https://twitter.com/teknoloji_haber",
-      "https://www.facebook.com/teknolojihaber",
-      "https://www.linkedin.com/company/teknoloji-haberleri",
+      "https://twitter.com/teknohaber_tr",
+      "https://www.facebook.com/teknohaber",
+      "https://www.linkedin.com/company/teknohaber",
     ],
     contactPoint: {
       "@type": "ContactPoint",

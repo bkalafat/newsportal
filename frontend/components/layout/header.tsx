@@ -19,8 +19,11 @@ export function Header() {
         <div className="flex h-16 items-center justify-between gap-4">
           {/* Logo */}
           <Link href="/" className="flex items-center space-x-2 group">
-            <Newspaper className="h-6 w-6 text-primary transition-transform group-hover:scale-110" />
-            <span className="hidden text-xl font-bold sm:inline-block bg-gradient-to-r from-primary to-primary/70 bg-clip-text text-transparent">{t("app.title")}</span>
+            <Newspaper className="h-6 w-6 text-[#0066FF] transition-transform group-hover:scale-110" />
+            <span className="hidden text-xl font-bold sm:inline-block">
+              <span className="text-[#0066FF]">Tekno</span>
+              <span className="text-[#FF6B35]">Haber</span>
+            </span>
           </Link>
 
           {/* Desktop Navigation */}

@@ -19,8 +19,9 @@ export function HeroSection() {
 
       <div className="container mx-auto px-4 py-12 md:py-16">
         <div className="mx-auto max-w-4xl space-y-6 text-center">
-          <h1 className="gradient-text text-4xl font-extrabold tracking-tight md:text-5xl lg:text-6xl">
-            {t("title")}
+          <h1 className="text-4xl font-extrabold tracking-tight md:text-5xl lg:text-6xl">
+            <span className="text-[#0066FF]">Tekno</span>
+            <span className="text-[#FF6B35]">Haber</span>
           </h1>
           <p className="text-muted-foreground text-lg md:text-xl lg:text-2xl max-w-2xl mx-auto font-light">
             {t("subtitle")}
