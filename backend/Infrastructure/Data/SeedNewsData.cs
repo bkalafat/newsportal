@@ -655,43 +655,51 @@ internal static class SeedNewsData
             new NewsArticle
             {
                 Category = "deepseek",
-                Type = "soru",
-                Caption = "GitHub Copilot Pro Ücretsiz Erişimi Kaybedilebilir mi?",
-                Slug = SlugHelper.GenerateSlug("GitHub Copilot Pro Ücretsiz Erişimi Kaybedilebilir mi"),
-                Keywords = "copilot, pro, free, open source, eligibility",
-                SocialTags = "#Copilot #OpenSource #Free",
-                Summary = "Açık kaynak projelere katkı yapanlara verilen ücretsiz Copilot Pro erişimi aylık kontrol ediliyor. Kullanıcılar erişimi kaybedip kaybetmeyeceklerini merak ediyor.",
-                ImgPath = "https://images.unsplash.com/photo-1633356122544-f134324a6cee?w=1200&q=80",
-                ImgAlt = "GitHub Copilot Pro",
-                ImageUrl = "https://images.unsplash.com/photo-1633356122544-f134324a6cee?w=1200&q=80",
-                ThumbnailUrl = "https://images.unsplash.com/photo-1633356122544-f134324a6cee?w=400&q=80",
-                Content = @"<p>Reddit kullanıcısı a-curious-goose, açık kaynak projesine katkı sağladığı için ücretsiz <strong>GitHub Copilot Pro</strong> erişimi aldığını paylaştı.</p>
+                Type = "haber",
+                Caption = "DeepSeek Coder V2: Kod Yazımında Yeni Standart",
+                Slug = SlugHelper.GenerateSlug("DeepSeek Coder V2 Kod Yazımında Yeni Standart"),
+                Keywords = "deepseek, coder, programming, AI, açık kaynak",
+                SocialTags = "#DeepSeek #Coder #Programming #AI",
+                Summary = "DeepSeek Coder V2, programlama dillerinde uzmanlaşmış açık kaynak AI modeli. 100+ programlama dilini destekliyor ve GitHub Copilot'a alternatif oluyor.",
+                ImgPath = "https://images.unsplash.com/photo-1555066931-4365d14bab8c?w=1200&q=80",
+                ImgAlt = "DeepSeek Coder",
+                ImageUrl = "https://images.unsplash.com/photo-1555066931-4365d14bab8c?w=1200&q=80",
+                ThumbnailUrl = "https://images.unsplash.com/photo-1555066931-4365d14bab8c?w=400&q=80",
+                Content = @"<p><strong>DeepSeek Coder V2</strong>, özellikle kod yazımı için optimize edilmiş açık kaynak bir AI model ailesi. Model, 100+ programlama dilini destekliyor.</p>
 
-<h2>Aylık Kontrol</h2>
-<p>Her ay şu mesajı alıyor:</p>
-<blockquote>""Thank you for renewing your free access to GitHub Copilot... GitHub Copilot checks eligibility monthly per our policy.""</blockquote>
-
-<h2>Belirsiz Kriterler</h2>
-<p>Uygunluk kriterleri belirsiz:</p>
+<h2>Teknik Özellikler</h2>
 <ul>
-<li>Hangi aktiviteler sayılıyor?</li>
-<li>Ne kadar contribution gerekli?</li>
-<li>Hangi projeler geçerli?</li>
-<li>Aylık minimum var mı?</li>
+<li><strong>Model Boyutları:</strong> 1B, 7B, 33B parametreli versiyonlar</li>
+<li><strong>Context Window:</strong> 16K token</li>
+<li><strong>Dil Desteği:</strong> Python, JavaScript, Java, C++, Go, Rust ve 94+ dil</li>
+<li><strong>Açık Kaynak:</strong> MIT lisansı ile tamamen ücretsiz</li>
 </ul>
 
-<h2>Soru</h2>
-<blockquote>""Erişimi kaybeden birini biliyor musunuz? Copilot Pro'ya gelecekte ne kadar güvenebileceğimi bilmek istiyorum.""</blockquote>
+<h2>Performans</h2>
+<table>
+<tr><th>Benchmark</th><th>DeepSeek V2</th><th>GPT-3.5</th></tr>
+<tr><td>HumanEval</td><td>78.6%</td><td>72.5%</td></tr>
+<tr><td>MBPP</td><td>75.4%</td><td>71.2%</td></tr>
+<tr><td>MultiPL-E</td><td>69.8%</td><td>65.3%</td></tr>
+</table>
 
-<p>Topluluktan henüz net bir yanıt gelmemiş. GitHub'ın resmi açıklaması bekleniyor.</p>",
-                Subjects = new[] { "GitHub", "Copilot", "Open Source" },
-                Authors = new[] { "a-curious-goose" },
-                ExpressDate = now.AddDays(-3),
-                CreateDate = now.AddDays(-3),
-                UpdateDate = now.AddDays(-3),
+<h2>Kullanım Alanları</h2>
+<ul>
+<li>Code completion (VS Code, JetBrains IDE'ler)</li>
+<li>Bug fixing ve refactoring</li>
+<li>Code explanation</li>
+<li>Unit test generation</li>
+</ul>
+
+<blockquote>""DeepSeek Coder, açık kaynak kod asistanı alanında yeni bir standart belirliyor."" - Developer Community</blockquote>",
+                Subjects = new[] { "DeepSeek", "Coding", "AI" },
+                Authors = new[] { "Dev Tools Team" },
+                ExpressDate = now.AddHours(-14),
+                CreateDate = now.AddHours(-14),
+                UpdateDate = now.AddHours(-14),
                 Priority = 2,
                 IsActive = true,
-                ViewCount = 450,
+                ViewCount = 3100,
                 IsSecondPageNews = false,
             },
 
@@ -815,6 +823,53 @@ internal static class SeedNewsData
                 Priority = 1,
                 IsActive = true,
                 ViewCount = 1800,
+                IsSecondPageNews = false,
+            },
+
+            // CLAUDEAI CATEGORY
+            new NewsArticle
+            {
+                Category = "artificialintelligence",
+                Type = "haber",
+                Caption = "Google Gemini 2.0: Multimodal AI'nın Yeni Dönemi",
+                Slug = SlugHelper.GenerateSlug("Google Gemini 2.0 Multimodal AI'nın Yeni Dönemi"),
+                Keywords = "google, gemini, AI, multimodal, yapay zeka",
+                SocialTags = "#Google #Gemini #AI #Multimodal",
+                Summary = "Google'ın Gemini 2.0 modeli, metin, görsel, ses ve video işlemede devrim yaratıyor. Gerçek zamanlı multimodal anlayış sunuyor.",
+                ImgPath = "https://images.unsplash.com/photo-1573164713714-d95e436ab8d6?w=1200&q=80",
+                ImgAlt = "Google Gemini 2.0",
+                ImageUrl = "https://images.unsplash.com/photo-1573164713714-d95e436ab8d6?w=1200&q=80",
+                ThumbnailUrl = "https://images.unsplash.com/photo-1573164713714-d95e436ab8d6?w=400&q=80",
+                Content = @"<p>Google'ın <strong>Gemini 2.0</strong> modeli, multimodal AI alanında yeni standartlar belirliyor. Model, metin, görsel, ses ve videoyu aynı anda işleyebiliyor.</p>
+
+<h2>Yeni Özellikler</h2>
+<ul>
+<li><strong>Native Multimodal:</strong> Tüm modality'leri aynı anda anlayabilir</li>
+<li><strong>Gerçek Zamanlı İşleme:</strong> Video stream'leri canlı analiz eder</li>
+<li><strong>2M Token Context:</strong> Çok uzun içerikleri işleyebilir</li>
+<li><strong>Spatial Understanding:</strong> 3D uzaysal farkındalık</li>
+</ul>
+
+<h2>Kullanım Senaryoları</h2>
+<ul>
+<li><strong>Video Analysis:</strong> Video içeriğini anlayıp açıklayabilir</li>
+<li><strong>AR/VR Applications:</strong> Artırılmış gerçeklik asistanları</li>
+<li><strong>Robotik:</strong> Robot vision ve kontrol</li>
+<li><strong>Healthcare:</strong> Medikal görüntü analizi</li>
+</ul>
+
+<h2>Performans</h2>
+<p>Gemini 2.0, MMMU (Multimodal Understanding) benchmark'ında %91.2 doğruluk oranı ile yeni rekor kırdı.</p>
+
+<blockquote>""Gemini 2.0, yapay zekanın dünyayı insanlar gibi algılamasına en yakın model."" - Sundar Pichai, Google CEO</blockquote>",
+                Subjects = new[] { "Google", "AI", "Multimodal" },
+                Authors = new[] { "AI Research Team" },
+                ExpressDate = now.AddHours(-16),
+                CreateDate = now.AddHours(-16),
+                UpdateDate = now.AddHours(-16),
+                Priority = 1,
+                IsActive = true,
+                ViewCount = 5400,
                 IsSecondPageNews = false,
             },
 
@@ -1010,10 +1065,10 @@ internal static class SeedNewsData
                 IsSecondPageNews = false,
             },
 
-            // Additional AI news
+            // Additional popular news
             new NewsArticle
             {
-                Category = "artificialintelligence",
+                Category = "popular",
                 Type = "haber",
                 Caption = "LinkedIn'de AI Powered İş İlanları Dönemi Başladı",
                 Slug = SlugHelper.GenerateSlug("LinkedIn'de AI Powered İş İlanları Dönemi Başladı"),
