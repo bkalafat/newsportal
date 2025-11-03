@@ -29,10 +29,175 @@ internal static class SeedNewsData
         var now = DateTime.UtcNow;
         var newsArticles = new List<NewsArticle>
         {
-            // GitHub News - Gerçek Reddit Haberleri (En Yüksek Puanlılar)
+            // POPULAR CATEGORY - En Popüler Haberler
             new NewsArticle
             {
-                Category = "Teknoloji",
+                Category = "popular",
+                Type = "haber",
+                Caption = "2025'in En İyi Teknoloji Trendleri",
+                Slug = SlugHelper.GenerateSlug("2025'in En İyi Teknoloji Trendleri"),
+                Keywords = "teknoloji, trend, AI, yapay zeka, gelecek",
+                SocialTags = "#Teknoloji #Trend #2025 #AI",
+                Summary = "2025 yılında dünyayı değiştirecek en önemli teknoloji trendleri açıklandı. Yapay zeka, kuantum bilişim ve sürdürülebilir teknolojiler ön planda.",
+                ImgPath = "https://images.unsplash.com/photo-1677442136019-21780ecad995?w=1200&q=80",
+                ImgAlt = "2025 Teknoloji Trendleri",
+                ImageUrl = "https://images.unsplash.com/photo-1677442136019-21780ecad995?w=1200&q=80",
+                ThumbnailUrl = "https://images.unsplash.com/photo-1677442136019-21780ecad995?w=400&q=80",
+                Content = @"<p>2025 yılı teknoloji dünyası için devrim niteliğinde gelişmelere sahne oluyor. <strong>Yapay zeka</strong>, kuantum bilişim ve sürdürülebilir teknolojiler en çok konuşulan konular arasında.</p>
+
+<h2>1. Yapay Zeka ve Otomasyonun Yükselişi</h2>
+<p>Yapay zeka artık günlük hayatımızın her alanına nüfuz ediyor. ChatGPT benzeri büyük dil modelleri, kod yazımından müşteri hizmetlerine kadar birçok sektörde devrim yaratıyor.</p>
+
+<h2>2. Kuantum Bilişim Gerçekleşiyor</h2>
+<p>IBM ve Google'ın öncülük ettiği kuantum bilgisayarlar, karmaşık problemleri klasik bilgisayarlardan milyonlarca kat hızlı çözebiliyor.</p>
+
+<h2>3. Sürdürülebilir Teknoloji</h2>
+<p>Yeşil enerji ve karbon-nötr veri merkezleri, teknoloji şirketlerinin yeni önceliği haline geldi.</p>
+
+<blockquote>""2025, teknolojinin insanlığa en çok fayda sağladığı yıl olacak."" - Tech Futurist Report</blockquote>",
+                Subjects = new[] { "Teknoloji", "Gelecek", "Trendler" },
+                Authors = new[] { "Teknoloji Editörü" },
+                ExpressDate = now.AddHours(-2),
+                CreateDate = now.AddHours(-2),
+                UpdateDate = now.AddHours(-2),
+                Priority = 1,
+                IsActive = true,
+                ViewCount = 5800,
+                IsSecondPageNews = false,
+            },
+            new NewsArticle
+            {
+                Category = "popular",
+                Type = "haber",
+                Caption = "Türkiye'de Teknoloji Girişimleri Rekor Kırıyor",
+                Slug = SlugHelper.GenerateSlug("Türkiye'de Teknoloji Girişimleri Rekor Kırıyor"),
+                Keywords = "türkiye, startup, girişim, teknoloji, yatırım",
+                SocialTags = "#Türkiye #Startup #Girişim #Teknoloji",
+                Summary = "Türkiye'deki teknoloji girişimleri 2025'in ilk çeyreğinde 2.5 milyar dolar yatırım aldı. Bu, bir önceki yıla göre %87 artış anlamına geliyor.",
+                ImgPath = "https://images.unsplash.com/photo-1559136555-9303baea8ebd?w=1200&q=80",
+                ImgAlt = "Türkiye Startup Ekosistemi",
+                ImageUrl = "https://images.unsplash.com/photo-1559136555-9303baea8ebd?w=1200&q=80",
+                ThumbnailUrl = "https://images.unsplash.com/photo-1559136555-9303baea8ebd?w=400&q=80",
+                Content = @"<p>Türkiye teknoloji ekosistemi için tarihi bir döneme tanıklık ediyor. <strong>2025'in ilk çeyreğinde 2.5 milyar dolar</strong> yatırım alan Türk girişimleri, bölgenin en hızlı büyüyen pazarı haline geldi.</p>
+
+<h2>En Çok Yatırım Alan Sektörler</h2>
+<ul>
+<li><strong>Fintech:</strong> $890 milyon</li>
+<li><strong>E-ticaret:</strong> $650 milyon</li>
+<li><strong>AI/Yazılım:</strong> $540 milyon</li>
+<li><strong>Sağlık Teknolojisi:</strong> $420 milyon</li>
+</ul>
+
+<h2>Unicorn Sayısı Artıyor</h2>
+<p>Türkiye'nin unicorn (1 milyar dolar değerlemeli) şirket sayısı 12'ye ulaştı. Yeni katılanlar arasında bir yapay zeka girişimi ve bir siber güvenlik şirketi bulunuyor.</p>
+
+<blockquote>""Türkiye, Avrupa'nın en dinamik teknoloji merkezlerinden biri olmaya devam ediyor."" - Venture Capital Association</blockquote>",
+                Subjects = new[] { "Girişimcilik", "Yatırım", "Ekonomi" },
+                Authors = new[] { "İş Dünyası Editörü" },
+                ExpressDate = now.AddHours(-5),
+                CreateDate = now.AddHours(-5),
+                UpdateDate = now.AddHours(-5),
+                Priority = 2,
+                IsActive = true,
+                ViewCount = 4200,
+                IsSecondPageNews = false,
+            },
+
+            // ARTIFICIAL INTELLIGENCE CATEGORY
+            new NewsArticle
+            {
+                Category = "artificialintelligence",
+                Type = "haber",
+                Caption = "OpenAI GPT-5 Duyurusu: İnsan Düzeyinde Akıl Yürütme",
+                Slug = SlugHelper.GenerateSlug("OpenAI GPT-5 Duyurusu İnsan Düzeyinde Akıl Yürütme"),
+                Keywords = "openai, gpt5, yapay zeka, AI, makine öğrenmesi",
+                SocialTags = "#OpenAI #GPT5 #YapayZeka #AI",
+                Summary = "OpenAI, GPT-5 modelini tanıttı. Yeni model, karmaşık problemlerde insan düzeyinde akıl yürütme ve muhakeme yapabiliyor.",
+                ImgPath = "https://images.unsplash.com/photo-1677442136019-21780ecad995?w=1200&q=80",
+                ImgAlt = "OpenAI GPT-5",
+                ImageUrl = "https://images.unsplash.com/photo-1677442136019-21780ecad995?w=1200&q=80",
+                ThumbnailUrl = "https://images.unsplash.com/photo-1677442136019-21780ecad995?w=400&q=80",
+                Content = @"<p>OpenAI, beklenen <strong>GPT-5</strong> modelini resmi olarak tanıttı. Yeni nesil yapay zeka modeli, karmaşık problemlerde insan düzeyinde akıl yürütme ve muhakeme yapabiliyor.</p>
+
+<h2>GPT-5'in Yeni Özellikleri</h2>
+<ul>
+<li><strong>Gelişmiş Muhakeme:</strong> Çok adımlı problem çözme</li>
+<li><strong>Multimodal:</strong> Metin, görsel, ses ve video işleme</li>
+<li><strong>Uzun Bağlam:</strong> 1 milyon token context window</li>
+<li><strong>Tutarlılık:</strong> %96 fact-checking accuracy</li>
+</ul>
+
+<h2>Performans Karşılaştırması</h2>
+<p>GPT-5, GPT-4'e göre matematik ve kodlamada %87 daha iyi performans gösteriyor. Özellikle bilimsel makale yazımı ve veri analizi konularında çığır açıyor.</p>
+
+<blockquote>""GPT-5, yapay genel zekanın (AGI) gerçekleştirilmesine en yakın modelimiz."" - Sam Altman, OpenAI CEO</blockquote>
+
+<h2>Kullanım Alanları</h2>
+<ul>
+<li>Bilimsel araştırma asistanı</li>
+<li>Tıbbi teşhis desteği</li>
+<li>Yazılım geliştirme</li>
+<li>Eğitim ve öğretim</li>
+<li>Yaratıcı içerik üretimi</li>
+</ul>",
+                Subjects = new[] { "Yapay Zeka", "OpenAI", "Teknoloji" },
+                Authors = new[] { "AI Editörü" },
+                ExpressDate = now.AddHours(-3),
+                CreateDate = now.AddHours(-3),
+                UpdateDate = now.AddHours(-3),
+                Priority = 1,
+                IsActive = true,
+                ViewCount = 6700,
+                IsSecondPageNews = false,
+            },
+            new NewsArticle
+            {
+                Category = "artificialintelligence",
+                Type = "haber",
+                Caption = "Yapay Zeka Etik Kuralları: AB'den Yeni Düzenleme",
+                Slug = SlugHelper.GenerateSlug("Yapay Zeka Etik Kuralları AB'den Yeni Düzenleme"),
+                Keywords = "AI, etik, AB, düzenleme, yapay zeka yasası",
+                SocialTags = "#AI #Etik #AB #Yapay Zeka",
+                Summary = "Avrupa Birliği, yapay zeka sistemleri için kapsamlı etik kurallar ve düzenlemeler getiriyor. AI Act, 2025'ten itibaren yürürlüğe giriyor.",
+                ImgPath = "https://images.unsplash.com/photo-1620712943543-bcc4688e7485?w=1200&q=80",
+                ImgAlt = "AI Etik Kuralları",
+                ImageUrl = "https://images.unsplash.com/photo-1620712943543-bcc4688e7485?w=1200&q=80",
+                ThumbnailUrl = "https://images.unsplash.com/photo-1620712943543-bcc4688e7485?w=400&q=80",
+                Content = @"<p>Avrupa Birliği'nin <strong>AI Act</strong> yasası, yapay zeka teknolojilerinin etik ve güvenli kullanımını garantilemek için 2025'te resmen yürürlüğe giriyor.</p>
+
+<h2>Temel Kurallar</h2>
+<ul>
+<li><strong>Şeffaflık:</strong> AI sistemlerin açıklanabilir olması</li>
+<li><strong>Veri Gizliliği:</strong> GDPR uyumluluğu</li>
+<li><strong>İnsan Denetimi:</strong> Kritik kararlarda insan onayı</li>
+<li><strong>Adalet:</strong> Algoritmik önyargıların önlenmesi</li>
+</ul>
+
+<h2>Risk Kategorileri</h2>
+<p>AI Act, yapay zeka sistemlerini risk seviyelerine göre kategorize ediyor:</p>
+<ol>
+<li><strong>Kabul Edilemez Risk:</strong> Yasaklı (sosyal skorlama, manipülasyon)</li>
+<li><strong>Yüksek Risk:</strong> Sıkı düzenleme (sağlık, güvenlik, finans)</li>
+<li><strong>Düşük Risk:</strong> Şeffaflık gereksinimleri (chatbot'lar)</li>
+<li><strong>Minimal Risk:</strong> Serbest kullanım (spam filtreleri)</li>
+</ol>
+
+<blockquote>""Bu düzenleme, yapay zekanın insanlığa faydalı kalmasını garanti edecek."" - Ursula von der Leyen, AB Komisyon Başkanı</blockquote>",
+                Subjects = new[] { "Yapay Zeka", "Etik", "Düzenleme" },
+                Authors = new[] { "Hukuk Editörü" },
+                ExpressDate = now.AddHours(-7),
+                CreateDate = now.AddHours(-7),
+                UpdateDate = now.AddHours(-7),
+                Priority = 2,
+                IsActive = true,
+                ViewCount = 3800,
+                IsSecondPageNews = false,
+            },
+
+            // GITHUB COPILOT CATEGORY
+            new NewsArticle
+            {
+                Category = "githubcopilot",
                 Type = "haber",
                 Caption = "GitHub Enterprise Cloud Çift Ücretlendirme Sorunu",
                 Slug = SlugHelper.GenerateSlug("GitHub Enterprise Cloud Çift Ücretlendirme Sorunu"),
@@ -72,7 +237,7 @@ internal static class SeedNewsData
             },
             new NewsArticle
             {
-                Category = "Teknoloji",
+                Category = "githubcopilot",
                 Type = "haber",
                 Caption = "GitHub Ana Sayfasında Activity Bölümü Kayboldu",
                 Slug = SlugHelper.GenerateSlug("GitHub Ana Sayfasında Activity Bölümü Kayboldu"),
@@ -104,7 +269,7 @@ internal static class SeedNewsData
             },
             new NewsArticle
             {
-                Category = "Teknoloji",
+                Category = "githubcopilot",
                 Type = "haber",
                 Caption = "GitHub Copilot Actions PR'larda Çöktü mü?",
                 Slug = SlugHelper.GenerateSlug("GitHub Copilot Actions PR'larda Çöktü mü"),
@@ -144,10 +309,100 @@ internal static class SeedNewsData
                 IsSecondPageNews = false,
             },
 
-            // Reddit News - Web Development
+            // MCP CATEGORY - Model Context Protocol
             new NewsArticle
             {
-                Category = "Teknoloji",
+                Category = "mcp",
+                Type = "haber",
+                Caption = "Model Context Protocol (MCP): AI Entegrasyonunun Geleceği",
+                Slug = SlugHelper.GenerateSlug("Model Context Protocol MCP AI Entegrasyonunun Geleceği"),
+                Keywords = "MCP, model context protocol, AI, entegrasyon, standart",
+                SocialTags = "#MCP #AI #Protocol #Standart",
+                Summary = "Anthropic'in geliştirdiği Model Context Protocol, AI modellerinin veri kaynaklarıyla standart bir şekilde iletişim kurmasını sağlıyor.",
+                ImgPath = "https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=1200&q=80",
+                ImgAlt = "Model Context Protocol",
+                ImageUrl = "https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=1200&q=80",
+                ThumbnailUrl = "https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=400&q=80",
+                Content = @"<p><strong>Model Context Protocol (MCP)</strong>, Anthropic tarafından geliştirilen ve AI modellerinin çeşitli veri kaynaklarıyla güvenli ve standart bir şekilde iletişim kurmasını sağlayan açık kaynak bir protokol.</p>
+
+<h2>MCP Nedir?</h2>
+<p>MCP, AI asistanlarının veritabanları, API'ler ve dosya sistemleri gibi kaynaklara erişimini standartlaştırır. Bu sayede geliştiriciler, her AI modeli için ayrı entegrasyon kodu yazmak zorunda kalmaz.</p>
+
+<h2>Temel Özellikler</h2>
+<ul>
+<li><strong>Evrensel Standart:</strong> Tüm AI modelleri için tek protokol</li>
+<li><strong>Güvenlik:</strong> Granular erişim kontrolü</li>
+<li><strong>Bağlam Yönetimi:</strong> Akıllı context window kullanımı</li>
+<li><strong>Açık Kaynak:</strong> Topluluk katkılarına açık</li>
+</ul>
+
+<h2>Destekleyen Platformlar</h2>
+<ul>
+<li>Anthropic Claude</li>
+<li>OpenAI GPT serisi</li>
+<li>Google Gemini</li>
+<li>Microsoft Copilot</li>
+</ul>
+
+<blockquote>""MCP, AI entegrasyonlarını HTTP'nin web için yaptığı gibi standartlaştıracak."" - Anthropic Blog</blockquote>",
+                Subjects = new[] { "AI", "Protocol", "Standart" },
+                Authors = new[] { "Teknoloji Editörü" },
+                ExpressDate = now.AddHours(-4),
+                CreateDate = now.AddHours(-4),
+                UpdateDate = now.AddHours(-4),
+                Priority = 1,
+                IsActive = true,
+                ViewCount = 2800,
+                IsSecondPageNews = false,
+            },
+            new NewsArticle
+            {
+                Category = "mcp",
+                Type = "haber",
+                Caption = "MCP ile Claude Desktop Entegrasyonu: Adım Adım Kılavuz",
+                Slug = SlugHelper.GenerateSlug("MCP ile Claude Desktop Entegrasyonu Adım Adım Kılavuz"),
+                Keywords = "MCP, claude, desktop, entegrasyon, tutorial",
+                SocialTags = "#MCP #Claude #Tutorial #AI",
+                Summary = "Claude Desktop uygulamasında MCP kullanarak yerel dosyalarınıza ve veritabanlarınıza güvenli erişim sağlayın.",
+                ImgPath = "https://images.unsplash.com/photo-1516116216624-53e697fedbea?w=1200&q=80",
+                ImgAlt = "Claude MCP Integration",
+                ImageUrl = "https://images.unsplash.com/photo-1516116216624-53e697fedbea?w=1200&q=80",
+                ThumbnailUrl = "https://images.unsplash.com/photo-1516116216624-53e697fedbea?w=400&q=80",
+                Content = @"<p>Claude Desktop uygulaması, <strong>Model Context Protocol (MCP)</strong> sayesinde yerel sisteminizdeki dosyalara ve veritabanlarına güvenli erişim sağlayabiliyor.</p>
+
+<h2>Kurulum Adımları</h2>
+<ol>
+<li>Claude Desktop'ı indirin ve kurun</li>
+<li>MCP server'ı npm ile yükleyin: <code>npm install -g @anthropic-ai/mcp-server</code></li>
+<li>Config dosyasını düzenleyin: <code>~/.config/claude/mcp.json</code></li>
+<li>İzinleri ayarlayın</li>
+<li>Claude'u yeniden başlatın</li>
+</ol>
+
+<h2>Örnek Kullanım Senaryoları</h2>
+<ul>
+<li><strong>Kod Analizi:</strong> Tüm projenizi Claude'a yüklemeden analiz edin</li>
+<li><strong>Veritabanı Sorguları:</strong> SQL sorguları çalıştırın</li>
+<li><strong>Dosya Operasyonları:</strong> Dosya okuma/yazma işlemleri</li>
+<li><strong>API Çağrıları:</strong> REST API'leri test edin</li>
+</ul>
+
+<blockquote>""MCP ile Claude artık gerçek bir yerel asistan gibi çalışıyor."" - Claude Desktop Kullanıcısı</blockquote>",
+                Subjects = new[] { "Claude", "MCP", "Tutorial" },
+                Authors = new[] { "Dev Tutorial Team" },
+                ExpressDate = now.AddHours(-6),
+                CreateDate = now.AddHours(-6),
+                UpdateDate = now.AddHours(-6),
+                Priority = 2,
+                IsActive = true,
+                ViewCount = 1900,
+                IsSecondPageNews = false,
+            },
+
+            // OPENAI CATEGORY
+            new NewsArticle
+            {
+                Category = "openai",
                 Type = "tartışma",
                 Caption = "Copilot'u Kapattıktan Sonra Kodlamanın Ne Kadar Stresli Olduğunu Fark Ettim",
                 Slug = SlugHelper.GenerateSlug("Copilot'u Kapattıktan Sonra Kodlamanın Ne Kadar Stresli Olduğunu Fark Ettim"),
@@ -190,7 +445,48 @@ internal static class SeedNewsData
             },
             new NewsArticle
             {
-                Category = "Teknoloji",
+                Category = "openai",
+                Type = "haber",
+                Caption = "OpenAI DevDay 2025: Yeni Araçlar ve API Güncellemeleri",
+                Slug = SlugHelper.GenerateSlug("OpenAI DevDay 2025 Yeni Araçlar ve API Güncellemeleri"),
+                Keywords = "openai, devday, API, developer, tools",
+                SocialTags = "#OpenAI #DevDay #API #Developer",
+                Summary = "OpenAI DevDay 2025'te geliştiriciler için yeni araçlar ve API güncellemeleri duyuruldu. Function calling ve vision API'leri geliştirildi.",
+                ImgPath = "https://images.unsplash.com/photo-1587440871875-191322ee64b0?w=1200&q=80",
+                ImgAlt = "OpenAI DevDay 2025",
+                ImageUrl = "https://images.unsplash.com/photo-1587440871875-191322ee64b0?w=1200&q=80",
+                ThumbnailUrl = "https://images.unsplash.com/photo-1587440871875-191322ee64b0?w=400&q=80",
+                Content = @"<p>OpenAI, yıllık geliştirici konferansı <strong>DevDay 2025</strong>'te çığır açan yenilikler duyurdu.</p>
+
+<h2>Yeni Özellikler</h2>
+<ul>
+<li><strong>Structured Outputs:</strong> JSON çıktıları garanti ediliyor</li>
+<li><strong>Vision API v2:</strong> Daha hızlı ve ucuz görsel işleme</li>
+<li><strong>Function Calling 2.0:</strong> Paralel fonksiyon çağrıları</li>
+<li><strong>Realtime API:</strong> WebSocket üzerinden streaming</li>
+</ul>
+
+<h2>Fiyat İndirimleri</h2>
+<table>
+<tr><td>GPT-4 Turbo</td><td>%40 indirim</td></tr>
+<tr><td>GPT-3.5</td><td>%60 indirim</td></tr>
+<tr><td>Embedding</td><td>%70 indirim</td></tr>
+</table>
+
+<blockquote>""Amacımız AI'yı her geliştirici için erişilebilir kılmak."" - OpenAI Developer Relations</blockquote>",
+                Subjects = new[] { "OpenAI", "API", "Developer" },
+                Authors = new[] { "Dev News Team" },
+                ExpressDate = now.AddHours(-8),
+                CreateDate = now.AddHours(-8),
+                UpdateDate = now.AddHours(-8),
+                Priority = 1,
+                IsActive = true,
+                ViewCount = 4100,
+                IsSecondPageNews = false,
+            },
+            new NewsArticle
+            {
+                Category = "openai",
                 Type = "tartışma",
                 Caption = "Kişisel vs Kurumsal GitHub Hesapları Güvenlik Sorunu",
                 Slug = SlugHelper.GenerateSlug("Kişisel vs Kurumsal GitHub Hesapları Güvenlik Sorunu"),
@@ -230,7 +526,135 @@ internal static class SeedNewsData
             },
             new NewsArticle
             {
-                Category = "Teknoloji",
+                Category = "robotics",
+                Type = "haber",
+                Caption = "Tesla Optimus Gen 3: Üretim Hattında İlk Robotlar",
+                Slug = SlugHelper.GenerateSlug("Tesla Optimus Gen 3 Üretim Hattında İlk Robotlar"),
+                Keywords = "tesla, optimus, robot, humanoid, üretim",
+                SocialTags = "#Tesla #Optimus #Robot #Humanoid",
+                Summary = "Tesla'nın insansı robotu Optimus Gen 3, şirketin üretim tesislerinde çalışmaya başladı. Robot, basit montaj işlerini insanlarla birlikte yapıyor.",
+                ImgPath = "https://images.unsplash.com/photo-1561557944-6e7860d1a7eb?w=1200&q=80",
+                ImgAlt = "Tesla Optimus Robot",
+                ImageUrl = "https://images.unsplash.com/photo-1561557944-6e7860d1a7eb?w=1200&q=80",
+                ThumbnailUrl = "https://images.unsplash.com/photo-1561557944-6e7860d1a7eb?w=400&q=80",
+                Content = @"<p>Tesla'nın <strong>Optimus Gen 3</strong> insansı robotu, şirketin Fremont fabrikasında üretime katıldı. Bu, ticari insansı robotların seri üretime geçişinde önemli bir kilometre taşı.</p>
+
+<h2>Teknik Özellikler</h2>
+<ul>
+<li><strong>Boy:</strong> 173 cm</li>
+<li><strong>Ağırlık:</strong> 73 kg</li>
+<li><strong>Batarya Ömrü:</strong> 8 saat</li>
+<li><strong>Taşıma Kapasitesi:</strong> 20 kg</li>
+<li><strong>Hız:</strong> 1.4 m/s (yürüme)</li>
+</ul>
+
+<h2>Yapabildiği İşler</h2>
+<ul>
+<li>Parça montajı</li>
+<li>Malzeme taşıma</li>
+<li>Kalite kontrol</li>
+<li>Temizlik işleri</li>
+</ul>
+
+<blockquote>""Optimus, fabrikalarımızda insanlarla yan yana çalışan ilk robot."" - Elon Musk</blockquote>",
+                Subjects = new[] { "Robotik", "Tesla", "Otomasyon" },
+                Authors = new[] { "Robotik Editörü" },
+                ExpressDate = now.AddHours(-9),
+                CreateDate = now.AddHours(-9),
+                UpdateDate = now.AddHours(-9),
+                Priority = 1,
+                IsActive = true,
+                ViewCount = 5300,
+                IsSecondPageNews = false,
+            },
+            new NewsArticle
+            {
+                Category = "robotics",
+                Type = "haber",
+                Caption = "Tıp Robotları: Ameliyat Masasındaki Yeni Asistanlar",
+                Slug = SlugHelper.GenerateSlug("Tıp Robotları Ameliyat Masasındaki Yeni Asistanlar"),
+                Keywords = "tıp, robot, cerrahi, sağlık, teknoloji",
+                SocialTags = "#TıpRobotları #Sağlık #Cerrahi",
+                Summary = "Cerrahi robotlar, ameliyatlarda doktorlara yardım ederek daha hassas ve güvenli operasyonlar yapılmasını sağlıyor.",
+                ImgPath = "https://images.unsplash.com/photo-1538108149393-fbbd81895907?w=1200&q=80",
+                ImgAlt = "Cerrahi Robot",
+                ImageUrl = "https://images.unsplash.com/photo-1538108149393-fbbd81895907?w=1200&q=80",
+                ThumbnailUrl = "https://images.unsplash.com/photo-1538108149393-fbbd81895907?w=400&q=80",
+                Content = @"<p><strong>Cerrahi robotlar</strong>, modern tıbbın vazgeçilmez araçları haline geldi. 2025'te dünya genelinde 10,000'den fazla hastanede robotik cerrahi sistemi kullanılıyor.</p>
+
+<h2>Avantajları</h2>
+<ul>
+<li><strong>Hassasiyet:</strong> Mikrometre düzeyinde kesinlik</li>
+<li><strong>Minimal İnvaziv:</strong> Daha küçük kesiler</li>
+<li><strong>Hızlı İyileşme:</strong> Hastanede kalış süresi %50 azalıyor</li>
+<li><strong>Titreşim Yok:</strong> Robot eli asla titremez</li>
+</ul>
+
+<h2>Kullanım Alanları</h2>
+<ul>
+<li>Kalp cerrahisi</li>
+<li>Kanser ameliyatları</li>
+<li>Organ nakli</li>
+<li>Nöroşirurji</li>
+</ul>
+
+<blockquote>""Robotik cerrahi, tıbbın geleceğini şekillendiriyor."" - American College of Surgeons</blockquote>",
+                Subjects = new[] { "Sağlık", "Robotik", "Tıp" },
+                Authors = new[] { "Sağlık Editörü" },
+                ExpressDate = now.AddHours(-11),
+                CreateDate = now.AddHours(-11),
+                UpdateDate = now.AddHours(-11),
+                Priority = 2,
+                IsActive = true,
+                ViewCount = 3600,
+                IsSecondPageNews = false,
+            },
+
+            // DEEPSEEK CATEGORY
+            new NewsArticle
+            {
+                Category = "deepseek",
+                Type = "haber",
+                Caption = "DeepSeek V3: Açık Kaynak AI Modeli ChatGPT'ye Rakip",
+                Slug = SlugHelper.GenerateSlug("DeepSeek V3 Açık Kaynak AI Modeli ChatGPT'ye Rakip"),
+                Keywords = "deepseek, AI, açık kaynak, chatgpt, yapay zeka",
+                SocialTags = "#DeepSeek #AI #OpenSource",
+                Summary = "Çin merkezli DeepSeek, GPT-4 seviyesinde performans gösteren açık kaynak AI modelini yayınladı. Model tamamen ücretsiz kullanılabiliyor.",
+                ImgPath = "https://images.unsplash.com/photo-1677442136019-21780ecad995?w=1200&q=80",
+                ImgAlt = "DeepSeek V3",
+                ImageUrl = "https://images.unsplash.com/photo-1677442136019-21780ecad995?w=1200&q=80",
+                ThumbnailUrl = "https://images.unsplash.com/photo-1677442136019-21780ecad995?w=400&q=80",
+                Content = @"<p><strong>DeepSeek V3</strong>, GPT-4 seviyesinde performans gösteren tamamen açık kaynak bir AI modeli olarak piyasaya sürüldü.</p>
+
+<h2>Öne Çıkan Özellikler</h2>
+<ul>
+<li><strong>Açık Kaynak:</strong> Model ağırlıkları tamamen açık</li>
+<li><strong>Yüksek Performans:</strong> Birçok benchmark'ta GPT-4'e yakın</li>
+<li><strong>Çok Dilli:</strong> 50+ dil desteği</li>
+<li><strong>Ücretsiz:</strong> API kullanımı sınırsız</li>
+</ul>
+
+<h2>Benchmark Sonuçları</h2>
+<table>
+<tr><td>MMLU</td><td>86.7%</td><td>(GPT-4: 87.2%)</td></tr>
+<tr><td>HumanEval</td><td>84.2%</td><td>(GPT-4: 85.4%)</td></tr>
+<tr><td>GSM8K</td><td>92.1%</td><td>(GPT-4: 92.0%)</td></tr>
+</table>
+
+<blockquote>""DeepSeek, AI demokratikleşmesinde önemli bir adım."" - AI Research Community</blockquote>",
+                Subjects = new[] { "AI", "Açık Kaynak", "DeepSeek" },
+                Authors = new[] { "AI Editörü" },
+                ExpressDate = now.AddHours(-10),
+                CreateDate = now.AddHours(-10),
+                UpdateDate = now.AddHours(-10),
+                Priority = 1,
+                IsActive = true,
+                ViewCount = 4800,
+                IsSecondPageNews = false,
+            },
+            new NewsArticle
+            {
+                Category = "deepseek",
                 Type = "soru",
                 Caption = "GitHub Copilot Pro Ücretsiz Erişimi Kaybedilebilir mi?",
                 Slug = SlugHelper.GenerateSlug("GitHub Copilot Pro Ücretsiz Erişimi Kaybedilebilir mi"),
@@ -271,10 +695,54 @@ internal static class SeedNewsData
                 IsSecondPageNews = false,
             },
 
-            // Technology News
+            // DOTNET CATEGORY
             new NewsArticle
             {
-                Category = "Teknoloji",
+                Category = "dotnet",
+                Type = "haber",
+                Caption = ".NET 9 Yayınlandı: Performans ve Bulut Odaklı Yenilikler",
+                Slug = SlugHelper.GenerateSlug(".NET 9 Yayınlandı Performans ve Bulut Odaklı Yenilikler"),
+                Keywords = "dotnet, .NET 9, C#, microsoft, geliştirme",
+                SocialTags = "#DotNet #CSharp #Microsoft",
+                Summary = "Microsoft, .NET 9'u resmi olarak yayınladı. Yeni sürüm, performans iyileştirmeleri ve bulut-native özelliklerle geliyor.",
+                ImgPath = "https://images.unsplash.com/photo-1515879218367-8466d910aaa4?w=1200&q=80",
+                ImgAlt = ".NET 9 Launch",
+                ImageUrl = "https://images.unsplash.com/photo-1515879218367-8466d910aaa4?w=1200&q=80",
+                ThumbnailUrl = "https://images.unsplash.com/photo-1515879218367-8466d910aaa4?w=400&q=80",
+                Content = @"<p>Microsoft, <strong>.NET 9</strong>'u Kasım 2025'te yayınladı. Yeni LTS (Long Term Support) sürümü, büyük performans iyileştirmeleri ve bulut-native özellikler getiriyor.</p>
+
+<h2>Yeni Özellikler</h2>
+<ul>
+<li><strong>C# 13:</strong> Yeni dil özellikleri</li>
+<li><strong>Native AOT:</strong> Gelişmiş ahead-of-time compilation</li>
+<li><strong>ASP.NET Core:</strong> Minimal API iyileştirmeleri</li>
+<li><strong>Blazor:</strong> Daha hızlı rendering</li>
+<li><strong>MAUI:</strong> Cross-platform UI geliştirmeleri</li>
+</ul>
+
+<h2>Performans İyileştirmeleri</h2>
+<p>.NET 9, .NET 8'e göre ortalama %30 daha hızlı:</p>
+<ul>
+<li>GC (Garbage Collector) optimizasyonları</li>
+<li>JIT compiler iyileştirmeleri</li>
+<li>Async/await overhead azaltma</li>
+<li>String operations hızlandırma</li>
+</ul>
+
+<blockquote>"".NET 9, geliştiricilerin bulut-native uygulamaları daha hızlı oluşturmasını sağlıyor."" - Scott Hunter, Microsoft</blockquote>",
+                Subjects = new[] { ".NET", "C#", "Development" },
+                Authors = new[] { "Dev Team" },
+                ExpressDate = now.AddHours(-12),
+                CreateDate = now.AddHours(-12),
+                UpdateDate = now.AddHours(-12),
+                Priority = 1,
+                IsActive = true,
+                ViewCount = 5100,
+                IsSecondPageNews = false,
+            },
+            new NewsArticle
+            {
+                Category = "dotnet",
                 Type = "haber",
                 Caption = "Yapay Zeka Kodlama Araçları: Copilot vs Cursor vs Cline",
                 Slug = SlugHelper.GenerateSlug("Yapay Zeka Kodlama Araçları Copilot vs Cursor vs Cline"),
@@ -350,10 +818,96 @@ internal static class SeedNewsData
                 IsSecondPageNews = false,
             },
 
-            // Twitter/X News
+            // CLAUDEAI CATEGORY
             new NewsArticle
             {
-                Category = "Eğlence",
+                Category = "claudeai",
+                Type = "haber",
+                Caption = "Claude 3.5 Sonnet: Kod Yazımında GPT-4'ü Geçti",
+                Slug = SlugHelper.GenerateSlug("Claude 3.5 Sonnet Kod Yazımında GPT-4'ü Geçti"),
+                Keywords = "claude, anthropic, AI, kod yazımı, GPT-4",
+                SocialTags = "#Claude #Anthropic #AI #Coding",
+                Summary = "Anthropic'in Claude 3.5 Sonnet modeli, kod yazımı benchmark'larında GPT-4'ü geride bıraktı. Özellikle uzun context window dikkat çekiyor.",
+                ImgPath = "https://images.unsplash.com/photo-1555949963-aa79dcee981c?w=1200&q=80",
+                ImgAlt = "Claude 3.5 Sonnet",
+                ImageUrl = "https://images.unsplash.com/photo-1555949963-aa79dcee981c?w=1200&q=80",
+                ThumbnailUrl = "https://images.unsplash.com/photo-1555949963-aa79dcee981c?w=400&q=80",
+                Content = @"<p><strong>Claude 3.5 Sonnet</strong>, Anthropic'in en gelişmiş AI modeli olarak piyasaya sürüldü. Model, özellikle kod yazımı ve uzun döküman analizi konularında GPT-4'ü geride bıraktı.</p>
+
+<h2>Öne Çıkan Özellikler</h2>
+<ul>
+<li><strong>200K Context Window:</strong> Çok uzun kodları analiz edebilir</li>
+<li><strong>Mükemmel Kod Kalitesi:</strong> HumanEval'de %89.7</li>
+<li><strong>Hızlı:</strong> GPT-4'ten 2x daha hızlı yanıt</li>
+<li><strong>Güvenli:</strong> Constitutional AI ile zararlı içerik filtreleme</li>
+</ul>
+
+<h2>Kod Yazımı Performansı</h2>
+<table>
+<tr><th>Benchmark</th><th>Claude 3.5</th><th>GPT-4</th></tr>
+<tr><td>HumanEval</td><td>89.7%</td><td>85.4%</td></tr>
+<tr><td>MBPP</td><td>87.3%</td><td>84.1%</td></tr>
+<tr><td>SWE-bench</td><td>42.1%</td><td>38.6%</td></tr>
+</table>
+
+<blockquote>""Claude 3.5, profesyonel geliştiriciler için tasarlandı."" - Anthropic Blog</blockquote>",
+                Subjects = new[] { "Claude", "AI", "Coding" },
+                Authors = new[] { "AI Editörü" },
+                ExpressDate = now.AddHours(-13),
+                CreateDate = now.AddHours(-13),
+                UpdateDate = now.AddHours(-13),
+                Priority = 1,
+                IsActive = true,
+                ViewCount = 4600,
+                IsSecondPageNews = false,
+            },
+            new NewsArticle
+            {
+                Category = "claudeai",
+                Type = "haber",
+                Caption = "Claude ile Projeler: Kişiselleştirilmiş AI Asistanı",
+                Slug = SlugHelper.GenerateSlug("Claude ile Projeler Kişiselleştirilmiş AI Asistanı"),
+                Keywords = "claude, projects, AI, asistan, kişiselleştirme",
+                SocialTags = "#Claude #Projects #AI #Assistant",
+                Summary = "Claude'un yeni Projects özelliği, kullanıcıların kendi özel AI asistanlarını oluşturmasına olanak tanıyor.",
+                ImgPath = "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=1200&q=80",
+                ImgAlt = "Claude Projects",
+                ImageUrl = "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=1200&q=80",
+                ThumbnailUrl = "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=400&q=80",
+                Content = @"<p><strong>Claude Projects</strong>, kullanıcıların kendi özel bilgi tabanlarıyla AI asistanları oluşturmasına olanak tanıyan yeni bir özellik.</p>
+
+<h2>Nasıl Çalışır?</h2>
+<ol>
+<li>Yeni bir proje oluşturun</li>
+<li>İlgili dökümanları yükleyin (PDF, MD, TXT)</li>
+<li>Custom instructions ekleyin</li>
+<li>AI'ya sorular sorun</li>
+</ol>
+
+<h2>Kullanım Senaryoları</h2>
+<ul>
+<li><strong>Kod Dokümantasyonu:</strong> Proje dokümantasyonunuzu yükleyin</li>
+<li><strong>Araştırma Asistanı:</strong> Makalelerinizi analiz edin</li>
+<li><strong>Öğrenme:</strong> Ders notlarınızı AI'ya öğretin</li>
+<li><strong>İş Süreçleri:</strong> SOP'larınızı yükleyin</li>
+</ul>
+
+<blockquote>""Projects, Claude'u gerçekten sizin AI asistanınız yapıyor."" - Claude Pro Kullanıcısı</blockquote>",
+                Subjects = new[] { "Claude", "Productivity", "AI" },
+                Authors = new[] { "Productivity Team" },
+                ExpressDate = now.AddHours(-15),
+                CreateDate = now.AddHours(-15),
+                UpdateDate = now.AddHours(-15),
+                Priority = 2,
+                IsActive = true,
+                ViewCount = 3200,
+                IsSecondPageNews = false,
+            },
+
+            // Additional popular news
+            new NewsArticle
+            {
+                Category = "popular",
                 Type = "haber",
                 Caption = "X (Twitter) Yeni Algoritma Güncellemesi: Uzun İçerikler Ön Planda",
                 Slug = SlugHelper.GenerateSlug("X Twitter Yeni Algoritma Güncellemesi Uzun İçerikler Ön Planda"),
@@ -405,7 +959,7 @@ internal static class SeedNewsData
             },
             new NewsArticle
             {
-                Category = "Eğlence",
+                Category = "popular",
                 Type = "haber",
                 Caption = "Twitter Spaces'te Yeni Özellik: Kayıt ve Tekrar İzleme",
                 Slug = SlugHelper.GenerateSlug("Twitter Spaces'te Yeni Özellik Kayıt ve Tekrar İzleme"),
@@ -456,10 +1010,10 @@ internal static class SeedNewsData
                 IsSecondPageNews = false,
             },
 
-            // LinkedIn News
+            // Additional AI news
             new NewsArticle
             {
-                Category = "İş",
+                Category = "artificialintelligence",
                 Type = "haber",
                 Caption = "LinkedIn'de AI Powered İş İlanları Dönemi Başladı",
                 Slug = SlugHelper.GenerateSlug("LinkedIn'de AI Powered İş İlanları Dönemi Başladı"),
@@ -522,7 +1076,7 @@ internal static class SeedNewsData
             },
             new NewsArticle
             {
-                Category = "İş",
+                Category = "popular",
                 Type = "haber",
                 Caption = "LinkedIn Learning: 2025'te En Çok Talep Gören 10 Skill",
                 Slug = SlugHelper.GenerateSlug("LinkedIn Learning 2025'te En Çok Talep Gören 10 Skill"),
@@ -596,10 +1150,10 @@ internal static class SeedNewsData
                 IsSecondPageNews = false,
             },
 
-            // Facebook News
+            // More news
             new NewsArticle
             {
-                Category = "Eğlence",
+                Category = "popular",
                 Type = "haber",
                 Caption = "Meta AI Artık WhatsApp, Instagram ve Facebook'ta Entegre",
                 Slug = SlugHelper.GenerateSlug("Meta AI Artık WhatsApp Instagram ve Facebook'ta Entegre"),
@@ -664,10 +1218,10 @@ internal static class SeedNewsData
                 IsSecondPageNews = false,
             },
 
-            // Instagram News
+            // More popular news
             new NewsArticle
             {
-                Category = "Eğlence",
+                Category = "popular",
                 Type = "haber",
                 Caption = "Instagram Reels Artık 10 Dakikaya Kadar Uzun Olabiliyor",
                 Slug = SlugHelper.GenerateSlug("Instagram Reels Artık 10 Dakikaya Kadar Uzun Olabiliyor"),
@@ -740,10 +1294,10 @@ internal static class SeedNewsData
                 IsSecondPageNews = false,
             },
 
-            // TikTok News
+            // More popular news
             new NewsArticle
             {
-                Category = "Eğlence",
+                Category = "popular",
                 Type = "haber",
                 Caption = "TikTok Shop Türkiye'de Açılıyor: E-Ticaretin Yeni Dönemi",
                 Slug = SlugHelper.GenerateSlug("TikTok Shop Türkiye'de Açılıyor E-Ticaretin Yeni Dönemi"),
@@ -824,10 +1378,10 @@ internal static class SeedNewsData
                 IsSecondPageNews = false,
             },
 
-            // YouTube News
+            // More popular news
             new NewsArticle
             {
-                Category = "Eğlence",
+                Category = "popular",
                 Type = "haber",
                 Caption = "YouTube Premium Türkiye'de Fiyat Artışı: Yeni Tarifeler Açıklandı",
                 Slug = SlugHelper.GenerateSlug("YouTube Premium Türkiye'de Fiyat Artışı Yeni Tarifeler Açıklandı"),
