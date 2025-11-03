@@ -62,7 +62,7 @@ const categoryMetadata: Record<string, { title: string; description: string; key
 
 export async function generateMetadata({ params }: CategoryPageProps): Promise<Metadata> {
   const { category } = await params;
-  const categoryData = categoryMetadata[category] || categoryMetadata.technology;
+  const categoryData = categoryMetadata[category] || categoryMetadata.popular;
   
   const title = categoryData?.title || "Teknoloji Haberleri";
   const description = categoryData?.description || "Son dakika teknoloji haberleri ve güncel gelişmeler.";

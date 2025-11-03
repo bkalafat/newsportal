@@ -5,7 +5,11 @@ import {
   Cpu,
   TrendingUp,
   ArrowRight,
-  MessageSquare,
+  Sparkles,
+  Bot,
+  Brain,
+  Github,
+  Code2,
 } from "lucide-react";
 import { Header } from "@/components/layout/header";
 import { Footer } from "@/components/layout/footer";
@@ -13,15 +17,17 @@ import { Footer } from "@/components/layout/footer";
 export const metadata: Metadata = {
   title: "Kategoriler - Teknoloji Haberleri",
   description:
-    "GitHub, Reddit ve genel teknoloji haberlerini kategorilere göre keşfedin.",
+    "Yapay zeka, GitHub Copilot, OpenAI, robotik ve daha fazla teknoloji kategorisini keşfedin.",
   keywords: [
-    "github",
-    "reddit",
-    "teknoloji",
-    "yazılım geliştirme",
+    "yapay zeka",
+    "github copilot",
+    "openai",
+    "claude ai",
+    "deepseek",
+    "robotik",
+    "dotnet",
+    "mcp",
     "teknoloji haberleri",
-    "github haberleri",
-    "reddit haberleri",
   ],
   alternates: {
     canonical: "/categories",
@@ -29,44 +35,92 @@ export const metadata: Metadata = {
   openGraph: {
     title: "Kategoriler - Teknoloji Haberleri",
     description:
-      "GitHub, Reddit ve teknoloji haberlerini kategorilere göre keşfedin.",
+      "Yapay zeka, GitHub Copilot ve teknoloji haberlerini kategorilere göre keşfedin.",
     type: "website",
     url: "/categories",
   },
   twitter: {
     card: "summary",
     title: "Kategoriler - Teknoloji Haberleri",
-    description: "GitHub, Reddit ve teknoloji haberlerini keşfedin.",
+    description: "Yapay zeka ve teknoloji haberlerini keşfedin.",
   },
 };
 
-// Force revalidation on every request to show updated Reddit categories
+// Force revalidation on every request to show updated categories
 export const revalidate = 0; // Disable ISR cache
 
 const categories = [
   {
-    id: "github",
-    icon: Cpu,
+    id: "popular",
+    icon: TrendingUp,
+    color: "text-rose-600 dark:text-rose-400",
+    bgColor: "bg-rose-50 dark:bg-rose-950",
+    description: "En popüler ve trend olan haberler",
+    displayName: "Popüler",
+  },
+  {
+    id: "artificialintelligence",
+    icon: Brain,
     color: "text-purple-600 dark:text-purple-400",
     bgColor: "bg-purple-50 dark:bg-purple-950",
-    description: "GitHub haberleri ve güncellemeler",
-    displayName: "GitHub",
+    description: "Yapay zeka ve makine öğrenimi haberleri",
+    displayName: "Yapay Zeka",
   },
   {
-    id: "reddit",
-    icon: MessageSquare,
+    id: "githubcopilot",
+    icon: Github,
+    color: "text-gray-800 dark:text-gray-300",
+    bgColor: "bg-gray-50 dark:bg-gray-950",
+    description: "GitHub Copilot güncellemeleri ve haberleri",
+    displayName: "GitHub Copilot",
+  },
+  {
+    id: "openai",
+    icon: Sparkles,
+    color: "text-emerald-600 dark:text-emerald-400",
+    bgColor: "bg-emerald-50 dark:bg-emerald-950",
+    description: "OpenAI, ChatGPT ve GPT modelleri",
+    displayName: "OpenAI",
+  },
+  {
+    id: "claudeai",
+    icon: Bot,
     color: "text-orange-600 dark:text-orange-400",
     bgColor: "bg-orange-50 dark:bg-orange-950",
-    description: "Reddit'ten teknoloji haberleri",
-    displayName: "Reddit",
+    description: "Anthropic Claude AI haberleri",
+    displayName: "Claude AI",
   },
   {
-    id: "technology",
-    icon: TrendingUp,
+    id: "dotnet",
+    icon: Code2,
+    color: "text-indigo-600 dark:text-indigo-400",
+    bgColor: "bg-indigo-50 dark:bg-indigo-950",
+    description: ".NET framework ve C# geliştirme",
+    displayName: ".NET",
+  },
+  {
+    id: "mcp",
+    icon: Cpu,
+    color: "text-cyan-600 dark:text-cyan-400",
+    bgColor: "bg-cyan-50 dark:bg-cyan-950",
+    description: "Model Context Protocol haberleri",
+    displayName: "MCP",
+  },
+  {
+    id: "robotics",
+    icon: Bot,
     color: "text-blue-600 dark:text-blue-400",
     bgColor: "bg-blue-50 dark:bg-blue-950",
-    description: "Genel teknoloji haberleri",
-    displayName: "Teknoloji",
+    description: "Robotik ve otomasyon sistemleri",
+    displayName: "Robotik",
+  },
+  {
+    id: "deepseek",
+    icon: Sparkles,
+    color: "text-violet-600 dark:text-violet-400",
+    bgColor: "bg-violet-50 dark:bg-violet-950",
+    description: "DeepSeek AI modelleri ve haberleri",
+    displayName: "DeepSeek",
   },
 ];
 
@@ -83,7 +137,7 @@ export default function CategoriesPage() {
               <h1 className="text-4xl font-bold md:text-5xl">Kategoriler</h1>
             </div>
             <p className="text-muted-foreground mx-auto max-w-2xl text-lg">
-              GitHub, Reddit ve teknoloji haberlerini kategorilere göre keşfedin
+              Yapay zeka, GitHub Copilot ve teknoloji haberlerini kategorilere göre keşfedin
             </p>
           </div>
 
@@ -122,13 +176,13 @@ export default function CategoriesPage() {
               <CardHeader>
                 <CardTitle>Her Gün Yeni Haberler</CardTitle>
                 <CardDescription>
-                  GitHub, Reddit ve teknoloji dünyasından güncel haberler
+                  Yapay zeka, GitHub Copilot ve teknoloji dünyasından güncel haberler
                 </CardDescription>
               </CardHeader>
               <CardContent>
                 <div className="mt-4 grid grid-cols-3 gap-4">
                   <div className="text-center">
-                    <div className="text-primary text-3xl font-bold">3</div>
+                    <div className="text-primary text-3xl font-bold">9</div>
                     <div className="text-muted-foreground text-sm">Teknoloji Kategorisi</div>
                   </div>
                   <div className="text-center">
