@@ -143,7 +143,7 @@ JwtSettings__ExpirationMinutes=60
 
 #### Manual Setup
 
-1. Go to [vercel.com](https://vercel.com)
+1. Go to [vercel.com](https://app.netlify.com/)
 2. Import GitHub repository
 3. Configure:
    - **Framework**: Next.js
@@ -344,9 +344,9 @@ az containerapp revision activate \
   --revision REVISION_NAME
 ```
 
-### Rollback Frontend (Vercel)
+### Rollback Frontend (Netlify)
 
-1. Go to Vercel dashboard
+1. Go to Netlify dashboard
 2. Select deployment
 3. Click "Promote to Production"
 
