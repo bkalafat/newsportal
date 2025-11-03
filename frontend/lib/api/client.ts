@@ -44,7 +44,7 @@ class NewsApiClient {
               ? "Request timeout. Backend might be starting up or experiencing high load."
               : "Unable to connect to backend. Please check your internet connection or try again later.",
             statusCode: 0,
-            errors: error.response?.data?.errors,
+            errors: undefined, // No response means no error details
           };
           console.error("Network error:", error.message);
           return Promise.reject(apiError);

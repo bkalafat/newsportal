@@ -20,7 +20,7 @@ export default function HomePage() {
       <Header />
       <main className="flex-1">
         <HeroSection />
-        <div className="container mx-auto space-y-16 px-4 py-12">
+        <div className="container mx-auto space-y-12 px-4 py-6">
           <LatestNews />
           <CategoriesSection />
         </div>
