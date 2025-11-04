@@ -403,7 +403,7 @@ internal static class SeedNewsData
             new NewsArticle
             {
                 Category = "openai",
-                Type = "tartışma",
+                Type = "haber",
                 Caption = "Copilot'u Kapattıktan Sonra Kodlamanın Ne Kadar Stresli Olduğunu Fark Ettim",
                 Slug = SlugHelper.GenerateSlug("Copilot'u Kapattıktan Sonra Kodlamanın Ne Kadar Stresli Olduğunu Fark Ettim"),
                 Keywords = "copilot, AI, coding, stress, productivity",
@@ -486,7 +486,7 @@ internal static class SeedNewsData
             },
             new NewsArticle
             {
-                Category = "openai",
+                Category = "githubcopilot",
                 Type = "tartışma",
                 Caption = "Kişisel vs Kurumsal GitHub Hesapları Güvenlik Sorunu",
                 Slug = SlugHelper.GenerateSlug("Kişisel vs Kurumsal GitHub Hesapları Güvenlik Sorunu"),
@@ -524,6 +524,7 @@ internal static class SeedNewsData
                 ViewCount = 900,
                 IsSecondPageNews = false,
             },
+            // ROBOTICS CATEGORY
             new NewsArticle
             {
                 Category = "robotics",
@@ -752,7 +753,7 @@ internal static class SeedNewsData
             {
                 Category = "dotnet",
                 Type = "haber",
-                Caption = "Yapay Zeka Kodlama Araçları: Copilot vs Cursor vs Cline",
+                Caption = "ASP.NET Core Minimal APIs: Modern Web Development",
                 Slug = SlugHelper.GenerateSlug("Yapay Zeka Kodlama Araçları Copilot vs Cursor vs Cline"),
                 Keywords = "AI, coding, copilot, cursor, cline, development tools",
                 SocialTags = "#AI #Coding #DevTools",
