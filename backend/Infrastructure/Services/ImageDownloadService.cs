@@ -180,6 +180,56 @@ internal sealed class ImageDownloadService
     }
 
     /// <summary>
+    /// Get a fallback image URL from Unsplash for tech news when original image is unavailable
+    /// </summary>
+    /// <param name="category">The news category (artificialintelligence, openai, etc.)</param>
+    /// <param name="keywords">Keywords from the article to find relevant image</param>
+    /// <returns>A random Unsplash image URL for the given category</returns>
+    public string GetFallbackImageUrl(string category, string? keywords = null)
+    {
+        // Map category to Unsplash search query
+        var query = category.ToLowerInvariant() switch
+        {
+            "artificialintelligence" => "artificial+intelligence,technology,AI,machine+learning",
+            "openai" => "artificial+intelligence,technology,chatgpt,AI",
+            "claudeai" => "artificial+intelligence,technology,AI,assistant",
+            "githubcopilot" => "coding,programming,developer,technology",
+            "mcp" => "technology,communication,network",
+            "robotics" => "robot,technology,automation,robotics",
+            "deepseek" => "artificial+intelligence,deep+learning,technology",
+            "dotnet" => "programming,code,developer,technology",
+            "popular" => "technology,innovation,digital,future",
+            _ => "technology,innovation,computer,digital"
+        };
+
+        // Add keywords if provided
+        if (!string.IsNullOrEmpty(keywords))
+        {
+            var keywordArray = keywords.Split(',', StringSplitOptions.RemoveEmptyEntries);
+            if (keywordArray.Length > 0)
+            {
+                var firstKeyword = keywordArray[0].Trim().Replace(" ", "+");
+                query = $"{firstKeyword},technology";
+            }
+        }
+
+        // Unsplash Source API provides random images based on query
+        // Format: https://source.unsplash.com/1920x1080/?query1,query2
+        // This will give us a random high-quality image
+        return $"https://source.unsplash.com/1920x1080/?{query}";
+    }
+
+    /// <summary>
+    /// Get a technology-themed placeholder image as last resort fallback
+    /// </summary>
+    /// <returns>A placeholder image URL</returns>
+    public string GetPlaceholderImageUrl()
+    {
+        // Use placeholder.com with tech-themed background
+        return "https://via.placeholder.com/1920x1080/1a1a2e/16213e?text=TeknoHaber+%7C+Technology+News";
+    }
+
+    /// <summary>
     /// Validate image URL for security (prevent SSRF attacks)
     /// </summary>
     private static bool IsValidImageUrl(string imageUrl)

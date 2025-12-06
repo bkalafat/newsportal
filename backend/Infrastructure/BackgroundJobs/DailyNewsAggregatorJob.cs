@@ -202,6 +202,7 @@ internal sealed class DailyNewsAggregatorJob : BackgroundService
                     // 6. Generate news ID (used for both article and image)
                     var newsId = ObjectId.GenerateNewId().ToString();
 
+                    // Try original image source first
                     if (!string.IsNullOrEmpty(imageSourceUrl))
                     {
                         imageMetadata = await imageDownloadService.DownloadAndUploadImageAsync(
@@ -215,6 +216,45 @@ internal sealed class DailyNewsAggregatorJob : BackgroundService
                             thumbnailUrl = imageStorageService.GetThumbnailUrl(newsId, ".jpg");
                             imgPath = imageMetadata.MinioObjectKey;
                             _logger.LogInformation("Downloaded and uploaded image for: {Title}", item.Title);
+                        }
+                    }
+
+                    // Fallback to Unsplash if no image was found or download failed
+                    if (imageMetadata == null)
+                    {
+                        var keywords = item.Tags != null && item.Tags.Count > 0 ? string.Join(", ", item.Tags) : null;
+                        var fallbackImageUrl = imageDownloadService.GetFallbackImageUrl(detectedCategory, keywords);
+                        _logger.LogInformation("Using fallback image from Unsplash for: {Title}", item.Title);
+
+                        imageMetadata = await imageDownloadService.DownloadAndUploadImageAsync(
+                            newsId,
+                            fallbackImageUrl,
+                            $"Technology image from Unsplash");
+
+                        if (imageMetadata != null)
+                        {
+                            imageUrl = imageStorageService.GetImageUrl(imageMetadata.MinioObjectKey);
+                            thumbnailUrl = imageStorageService.GetThumbnailUrl(newsId, ".jpg");
+                            imgPath = imageMetadata.MinioObjectKey;
+                            _logger.LogInformation("Successfully downloaded fallback image for: {Title}", item.Title);
+                        }
+                        else
+                        {
+                            // Last resort: use placeholder
+                            var placeholderUrl = imageDownloadService.GetPlaceholderImageUrl();
+                            _logger.LogWarning("Using placeholder image for: {Title}", item.Title);
+
+                            imageMetadata = await imageDownloadService.DownloadAndUploadImageAsync(
+                                newsId,
+                                placeholderUrl,
+                                "Placeholder technology image");
+
+                            if (imageMetadata != null)
+                            {
+                                imageUrl = imageStorageService.GetImageUrl(imageMetadata.MinioObjectKey);
+                                thumbnailUrl = imageStorageService.GetThumbnailUrl(newsId, ".jpg");
+                                imgPath = imageMetadata.MinioObjectKey;
+                            }
                         }
                     }
 

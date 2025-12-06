@@ -13,100 +13,66 @@ internal sealed class CategoryDetectionService
 {
     private readonly ILogger<CategoryDetectionService> _logger;
 
+    // Valid categories from frontend: popular, artificialintelligence, githubcopilot, mcp, openai, robotics, deepseek, dotnet, claudeai
     // Category keywords with weights
     private static readonly Dictionary<string, (string Category, List<string> Keywords, int Weight)> CategoryPatterns = new()
     {
-        // Technology - AI, ML, Programming
-        ["tech_ai"] = ("Technology", new List<string>
+        // OpenAI - ChatGPT, GPT models
+        ["openai"] = ("openai", new List<string>
         {
-            "ai", "artificial intelligence", "machine learning", "ml", "deep learning",
-            "neural network", "chatgpt", "gpt-4", "claude", "llm", "openai", "anthropic",
-            "copilot", "github copilot", "transformer", "bert", "nlp"
+            "openai", "chatgpt", "gpt-4", "gpt-5", "gpt", "sam altman",
+            "dall-e", "whisper", "sora", "o1"
         }, 100),
 
-        ["tech_programming"] = ("Technology", new List<string>
+        // Claude AI - Anthropic
+        ["claudeai"] = ("claudeai", new List<string>
         {
-            "programming", "code", "developer", "software", "github", "git",
-            "python", "javascript", "typescript", "rust", "go", "java", "c#",
-            "framework", "library", "api", "sdk", "docker", "kubernetes"
+            "claude", "anthropic", "claude ai", "claude 3", "claude sonnet",
+            "claude opus", "dario amodei"
+        }, 100),
+
+        // GitHub Copilot - AI coding assistant
+        ["githubcopilot"] = ("githubcopilot", new List<string>
+        {
+            "github copilot", "copilot", "copilot x", "copilot chat",
+            "github ai", "code completion", "ai pair programming"
+        }, 100),
+
+        // General AI/ML - When specific AI service not mentioned
+        ["artificialintelligence"] = ("artificialintelligence", new List<string>
+        {
+            "artificial intelligence", "ai", "machine learning", "ml", "deep learning",
+            "neural network", "llm", "large language model", "generative ai",
+            "transformer", "bert", "nlp", "computer vision", "ai model"
         }, 90),
 
-        ["tech_web"] = ("Technology", new List<string>
+        // Robotics
+        ["robotics"] = ("robotics", new List<string>
         {
-            "web", "frontend", "backend", "react", "vue", "angular", "next.js",
-            "node.js", "express", "fastapi", "django", "flask"
-        }, 85),
-
-        // Science - Research, Physics, Space
-        ["science_research"] = ("Science", new List<string>
-        {
-            "research", "study", "scientist", "discovery", "breakthrough",
-            "experiment", "analysis", "data science", "statistics"
+            "robot", "robotics", "automation", "autonomous", "drone",
+            "tesla bot", "boston dynamics", "humanoid", "industrial robot"
         }, 95),
 
-        ["science_space"] = ("Science", new List<string>
+        // DeepSeek - Chinese AI company
+        ["deepseek"] = ("deepseek", new List<string>
         {
-            "space", "nasa", "spacex", "rocket", "mars", "moon", "astronomy",
-            "telescope", "satellite", "iss", "astronaut"
-        }, 90),
+            "deepseek", "deep seek", "deepseek ai", "deepseek coder",
+            "deepseek v2", "chinese ai"
+        }, 100),
 
-        ["science_physics"] = ("Science", new List<string>
+        // .NET - Microsoft development platform
+        ["dotnet"] = ("dotnet", new List<string>
         {
-            "physics", "quantum", "particle", "atom", "nuclear", "energy",
-            "cern", "black hole", "relativity"
-        }, 90),
+            ".net", "dotnet", "c#", "csharp", "asp.net", "blazor",
+            "entity framework", "maui", ".net core", "visual studio"
+        }, 95),
 
-        // Business - Startups, Finance, Economy
-        ["business_startup"] = ("Business", new List<string>
+        // MCP - Model Context Protocol
+        ["mcp"] = ("mcp", new List<string>
         {
-            "startup", "founder", "vc", "venture capital", "funding", "investment",
-            "unicorn", "ipo", "acquisition", "merger", "y combinator"
-        }, 85),
-
-        ["business_finance"] = ("Business", new List<string>
-        {
-            "stock", "market", "trading", "crypto", "bitcoin", "ethereum",
-            "finance", "bank", "economy", "inflation", "recession"
-        }, 80),
-
-        // Health - Medicine, Biotech
-        ["health_medical"] = ("Health", new List<string>
-        {
-            "health", "medical", "doctor", "hospital", "medicine", "drug",
-            "vaccine", "disease", "covid", "pandemic", "treatment", "therapy"
-        }, 85),
-
-        ["health_biotech"] = ("Health", new List<string>
-        {
-            "biotech", "biology", "genetics", "dna", "crispr", "gene",
-            "pharmaceutical", "clinical trial"
-        }, 85),
-
-        // Entertainment - Gaming, Movies
-        ["entertainment_gaming"] = ("Entertainment", new List<string>
-        {
-            "game", "gaming", "esports", "xbox", "playstation", "nintendo",
-            "steam", "unity", "unreal", "indie game"
-        }, 75),
-
-        ["entertainment_media"] = ("Entertainment", new List<string>
-        {
-            "movie", "film", "netflix", "streaming", "tv show", "series",
-            "hollywood", "actor", "director"
-        }, 70),
-
-        // World - Politics, Global Events
-        ["world_politics"] = ("World", new List<string>
-        {
-            "politics", "government", "election", "president", "congress",
-            "parliament", "policy", "regulation", "law", "legislation"
-        }, 80),
-
-        ["world_global"] = ("World", new List<string>
-        {
-            "international", "global", "world", "country", "nation",
-            "united nations", "un", "eu", "nato"
-        }, 75),
+            "mcp", "model context protocol", "context protocol",
+            "llm context", "ai context"
+        }, 100),
     };
 
     public CategoryDetectionService(ILogger<CategoryDetectionService> logger)
@@ -138,7 +104,7 @@ internal sealed class CategoryDetectionService
         // Score based on keyword matching
         foreach (var (patternKey, (category, keywords, weight)) in CategoryPatterns)
         {
-            var matches = keywords.Count(keyword => 
+            var matches = keywords.Count(keyword =>
                 Regex.IsMatch(combinedText, $@"\b{Regex.Escape(keyword)}\b", RegexOptions.IgnoreCase));
 
             if (matches > 0)
@@ -184,7 +150,7 @@ internal sealed class CategoryDetectionService
             return detectedCategory;
         }
 
-        // Default to Technology for tech-heavy sources
+        // Default to popular for general tech news or when category cannot be determined
         var defaultCategory = GetDefaultCategoryFromSource(source);
         _logger.LogDebug("Using default category '{Category}' for source '{Source}'", defaultCategory, source);
         return defaultCategory;
@@ -198,22 +164,34 @@ internal sealed class CategoryDetectionService
         var lowerSource = source.ToLowerInvariant();
 
         // Reddit subreddit mapping
-        if (lowerSource.Contains("artificial") || lowerSource.Contains("machinelearning") ||
-            lowerSource.Contains("openai") || lowerSource.Contains("claudeai"))
+        if (lowerSource.Contains("r/artificial") || lowerSource.Contains("r/machinelearning"))
         {
-            return "Science";
+            return "artificialintelligence";
         }
 
-        if (lowerSource.Contains("programming") || lowerSource.Contains("github"))
+        if (lowerSource.Contains("r/openai"))
         {
-            return "Technology";
+            return "openai";
         }
 
-        // Source-based detection
-        if (lowerSource.Contains("techcrunch") || lowerSource.Contains("ars technica") ||
-            lowerSource.Contains("hacker news"))
+        if (lowerSource.Contains("r/claudeai"))
         {
-            return "Technology";
+            return "claudeai";
+        }
+
+        if (lowerSource.Contains("r/github") || lowerSource.Contains("github trending"))
+        {
+            return "githubcopilot";
+        }
+
+        if (lowerSource.Contains("r/dotnet") || lowerSource.Contains("r/csharp"))
+        {
+            return "dotnet";
+        }
+
+        if (lowerSource.Contains("r/robotics"))
+        {
+            return "robotics";
         }
 
         return string.Empty;
@@ -226,17 +204,24 @@ internal sealed class CategoryDetectionService
     {
         var lowerSource = source.ToLowerInvariant();
 
-        // For most tech sources, default to Technology
-        if (lowerSource.Contains("reddit") || lowerSource.Contains("github") ||
-            lowerSource.Contains("dev.to") || lowerSource.Contains("medium") ||
-            lowerSource.Contains("hacker news") || lowerSource.Contains("techcrunch") ||
-            lowerSource.Contains("ars technica"))
+        // Check for specific sources
+        if (lowerSource.Contains("openai") || lowerSource.Contains("chatgpt"))
         {
-            return "Technology";
+            return "openai";
         }
 
-        // Default fallback
-        return "Technology";
+        if (lowerSource.Contains("anthropic") || lowerSource.Contains("claude"))
+        {
+            return "claudeai";
+        }
+
+        if (lowerSource.Contains("github copilot") || lowerSource.Contains("copilot"))
+        {
+            return "githubcopilot";
+        }
+
+        // For most tech sources, default to popular (general tech news)
+        return "popular";
     }
 
     /// <summary>
@@ -249,7 +234,7 @@ internal sealed class CategoryDetectionService
         foreach (var item in newsItems)
         {
             var category = DetectCategory(item.Title, item.Content, item.Source, item.Tags, item.Score);
-            
+
             if (!categoryEngagement.ContainsKey(category))
             {
                 categoryEngagement[category] = 0;

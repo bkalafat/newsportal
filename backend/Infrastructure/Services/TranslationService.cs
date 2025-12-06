@@ -40,22 +40,30 @@ public sealed class TranslationService
             return text;
         }
 
+        // Skip translation if already in Turkish
+        if (IsTurkish(text))
+        {
+            _logger.LogDebug("Text is already in Turkish, skipping translation");
+            return text;
+        }
+
         try
         {
             // Try MyMemory first (no API key required, 10k chars/day)
             var translated = await TranslateWithMyMemoryAsync(text, sourceLanguage);
-            if (!string.IsNullOrEmpty(translated))
+            if (!string.IsNullOrEmpty(translated) && translated != text)
             {
+                _logger.LogInformation("Successfully translated {Length} chars to Turkish", text.Length);
                 return translated;
             }
 
             // Fallback: Return original if translation fails
-            _logger.LogWarning("Translation failed, returning original text");
+            _logger.LogWarning("Translation failed or returned unchanged text, keeping original");
             return text;
         }
         catch (Exception ex)
         {
-            _logger.LogError(ex, "Error translating text");
+            _logger.LogError(ex, "Error translating text: {Text}", text.Length > 100 ? text[..100] + "..." : text);
             return text;
         }
     }
@@ -81,10 +89,32 @@ public sealed class TranslationService
 
             if (result?.ResponseData?.TranslatedText != null)
             {
+                // Check if translation actually happened (API sometimes returns original text)
+                var translatedText = result.ResponseData.TranslatedText;
+
+                // MyMemory may return "PLEASE SELECT TWO DISTINCT LANGUAGES" or similar errors
+                if (translatedText.Contains("PLEASE SELECT", StringComparison.OrdinalIgnoreCase) ||
+                    translatedText.Contains("MYMEMORY WARNING", StringComparison.OrdinalIgnoreCase))
+                {
+                    _logger.LogWarning("MyMemory API returned error message: {Message}", translatedText);
+                    return string.Empty;
+                }
+
                 _logger.LogDebug("Successfully translated {Length} characters", text.Length);
-                return result.ResponseData.TranslatedText;
+                return translatedText;
             }
 
+            // Check if quota is exceeded
+            if (result?.QuotaFinished?.IsFinished == true)
+            {
+                _logger.LogWarning("MyMemory translation quota exceeded");
+            }
+
+            return string.Empty;
+        }
+        catch (HttpRequestException ex)
+        {
+            _logger.LogError(ex, "HTTP error during MyMemory translation");
             return string.Empty;
         }
         catch (Exception ex)
@@ -191,7 +221,7 @@ public sealed class TranslationService
 
         // Check for Turkish-specific characters
         var turkishChars = new HashSet<char> { 'ı', 'ğ', 'ü', 'ş', 'ö', 'ç', 'İ', 'Ğ', 'Ü', 'Ş', 'Ö', 'Ç' };
-        
+
         // Count Turkish characters
         int turkishCharCount = 0;
         int totalChars = 0;
